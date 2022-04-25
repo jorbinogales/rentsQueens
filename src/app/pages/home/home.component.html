@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <app-filter></app-filter>
+        <div class="row mt-4" *ngIf="departament_active; else departamentTemplate">
+            <div 
+                class="col-4 m-0 p-1" 
+                *ngFor="let departament of departaments" 
+                >
+                <app-card [departament]="departament" (click)="activeDepartament()"></app-card>
+            </div>
+        </div>
+        <ng-template #departamentTemplate>
+            <div class="row mt-4">
+                <div class="col-8">
+                    <app-departament></app-departament>
+                </div>
+                <div class="col-4">
+                    <div *ngFor="let departament of departaments" class="mt-2">
+                        <app-card [departament]="departament" (click)="activeDepartament()"></app-card>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
