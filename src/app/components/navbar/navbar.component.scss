@@ -1,0 +1,36 @@
+.form-control{
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.form-control{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.form-control:hover input{
+  border-bottom:0px solid transparent !important;
+}
+
+.modal-dialog{
+  max-width: 398px !important;
+}
+
+#loginBtn{
+  position:absolute;
+  right:0px;
+}
+
+#signIn{
+  display:block;
+  position:relative;
+  margin-top:55px;
+  background-color: #00B248 !important;
+}
+
+@media only screen and (max-width:968px) {
+  #loginBtn{
+    position:absolute;
+    right:100px;
+  }
+}
