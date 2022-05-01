@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { ResponseInterface } from 'src/app/interface/response.interface';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +12,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean = true;
+  form: any = FormGroup;
+  error: any;
+
+  constructor(
+    private readonly _formBuilder: FormBuilder,
+    private readonly _navbarService: NavbarService,
+    private readonly _cookieService: CookieService,
+    private readonly _router: Router,
+  ) { }
 
   ngOnInit(): void {
+    this.buildForm();
   }
+
+  private buildForm(){
+    this.form = this._formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
+
+  login(){
+    this.error = null;
+    this.loading = true;
+    const form = this.form.getRawValue();
+    console.log(form);
+    this._navbarService.login(form).subscribe((resp:any) =>{
+      this.error = null;
+      this._cookieService.set('token', resp.access_token),
+      this._router.navigate(['/', 'dashboard'])
+    },(err) => {
+        if(err.error.message == ResponseInterface.NOT_FOUND_EXCEPTION) {
+          this.error = 'Email or password incorrect';
+        } else {
+          this.error = err.error.message;
+        }
+        this.loading = false;
+    })
+  } 
 
 }

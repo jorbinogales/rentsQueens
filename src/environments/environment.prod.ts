@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  MS_USER_API: 'https://ms-user.rentsbrooklynqueens.com'
 };

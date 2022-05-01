@@ -10,6 +10,6 @@ import { ComponentsModule } from '../components/components.module';
   ],
   exports:[
     HomeModule,
-  ]
+  ],
 })
 export class PagesModule { }
