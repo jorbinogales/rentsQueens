@@ -1,0 +1,13 @@
+.dropzone {
+    border: 1px solid #e0e2f7;
+    border-radius: 4px;
+}
+
+.dark-mode{
+    app-forms-advanced{
+        .dropzone{
+            border: 1px solid #796bdb42 !important;
+            background: #30304d !important;
+        }
+    }
+}

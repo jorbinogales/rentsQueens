@@ -1,0 +1,260 @@
+<div class="container">
+    <div class="container-fluid">
+
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="card-title">Create apartament</h2>
+            </div>
+            <div class="card-body">   
+                <div 
+                *ngIf="error"
+                class="alert alert-danger">
+                    Fix the following errors
+                </div>  
+                <app-loading *ngIf="loading"></app-loading>
+                <form *ngIf="loading == false"
+                [formGroup]="form" (submit)="createApartament()">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="text" 
+                                class="form-control" 
+                                id="title"
+                                placeholder="Title"
+                                formControlName="title"
+                                name="title"
+                                required
+                                >
+                            </div>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error && error.indexOf('title should not be empty') > -1">
+                                    This value is required
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="number" 
+                                class="form-control" 
+                                id="price"
+                                placeholder="price"
+                                formControlName="price"
+                                name="price">
+                            </div>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error && error.indexOf('price should not be empty') > -1">
+                                    This value is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="text" 
+                                class="form-control" 
+                                id="address"
+                                placeholder="Address"
+                                formControlName="address"
+                                name="address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="number" 
+                                class="form-control" 
+                                id="floors"
+                                placeholder="Floors"
+                                formControlName="floors"
+                                name="floors">
+                            </div>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error &&  error.indexOf('floors must be a number conforming to the specified constraints') > -1">
+                                    This value is required
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="number" 
+                                class="form-control" 
+                                id="bedrooms"
+                                placeholder="Beds"
+                                formControlName="bedrooms"
+                                name="bedrooms">
+                            </div>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error &&  error.indexOf('bedrooms must be a number conforming to the specified constraints') > -1">
+                                    This value is required
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input 
+                                type="number" 
+                                class="form-control" 
+                                id="bathrooms"
+                                placeholder="Baths"
+                                formControlName="bathrooms"
+                                name="bathrooms">
+                            </div>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error &&  error.indexOf('bathrooms must be a number conforming to the specified constraints') > -1">
+                                    This value is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Credit</p>
+                            <div class="custom-control custom-switch">
+                                <input 
+                                class="custom-control-input" 
+                                id="creditSwitch" 
+                                type="checkbox"
+                                formControlName="credit"
+                                name="credit">
+                                <span class="custom-control-track"></span>
+                                <label class="custom-control-label" for="creditSwitch"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p>Parking</p>
+                            <div class="custom-control custom-switch">
+                                <input 
+                                class="custom-control-input" 
+                                id="parkingSwitch" 
+                                type="checkbox"
+                                formControlName="parking"
+                                name="parking">
+                                <span class="custom-control-track"></span>
+                                <label class="custom-control-label" for="parkingSwitch"></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p>Pets</p>
+                            <div class="custom-control custom-switch">
+                                <input 
+                                class="custom-control-input" 
+                                id="petsSwitch" 
+                                type="checkbox"
+                                formControlName="pets"
+                                name="pets">
+                                <span class="custom-control-track"></span>
+                                <label class="custom-control-label" for="petsSwitch"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <textarea 
+                                formControlName="description"
+                                name="description"
+                                class="form-control mt-3" 
+                                id="description" 
+                                rows="3"
+                                placeholder="Description"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            
+                            <!-- Show uploaded  images by user 
+                            latere here cropped images will be 
+                            replaced with origional -->
+                            <div style="display:flex ;max-width:600px; overflow: auto;">
+                                <div *ngFor="let item of ulpoadedFiles" style="margin:5px">
+                                    <span (click)="cropImage(item.imgId)">
+                                        <img [src]="item.imgBase64" style="max-width:300px;max-height:100px ;border:2px solid gray" />
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                            <!-- this will allow user select multiple Images -->
+                            <div class="custom-file">
+                                <input 
+                                id="validatedCustomFile" 
+                                class="custom-file-input" 
+                                type="file" 
+                                multiple 
+                                (change)="fileChangeEvent($event)"
+                                accept="image/png, image/jpeg" 
+                                #image />
+                                <label class="custom-file-label" for="validatedCustomFile">
+                                    Upload Fiel About Apartament
+                                </label>
+                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                            <!--  -->
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success float-right mt-5" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+    <button 
+    class="d-none" 
+    id="btnFileModal"
+    data-toggle="modal" 
+    data-target="#FileModal"
+    >
+      Login
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div 
+    class="modal fade" 
+    id="FileModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="exampleModalCenterTitle" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="modal-body">
+                <image-cropper 
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="16 / 9"
+                    [resizeToWidth]="600"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"></image-cropper>
+            </div>
+            <div class="modal-footer">
+                <button 
+                class="btn btn-indigo" 
+                type="button"
+                (click)="SaveCropedImage()"
+                >Save</button>
+                <button 
+                type="button" 
+                class="btn btn-secondary" 
+                data-dismiss="modal"
+                (click)="onCloseHandled()"
+                >Close</button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

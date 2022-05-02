@@ -12,7 +12,8 @@ import { NavbarService } from './navbar.service';
 })
 export class NavbarComponent implements OnInit {
 
-  loading: boolean = true;
+  session: boolean = false;
+  loading: boolean = false;
   form: any = FormGroup;
   error: any;
 
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.onSession();
   }
 
   private buildForm(){
@@ -34,15 +36,24 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  private onSession(){
+    const token = this._cookieService.get('token');
+    token ? this.session = true : this.session = false;
+  }
+  
+
   login(){
+    const button = document.getElementById('loginBtn');
     this.error = null;
     this.loading = true;
     const form = this.form.getRawValue();
-    console.log(form);
     this._navbarService.login(form).subscribe((resp:any) =>{
       this.error = null;
       this._cookieService.set('token', resp.access_token),
-      this._router.navigate(['/', 'dashboard'])
+      this._router.navigate(['/', 'dashboard']);
+      this.onSession();
+      button.click();
+      this.loading = false;
     },(err) => {
         if(err.error.message == ResponseInterface.NOT_FOUND_EXCEPTION) {
           this.error = 'Email or password incorrect';
@@ -52,5 +63,11 @@ export class NavbarComponent implements OnInit {
         this.loading = false;
     })
   } 
+
+  logout(){
+    this._router.navigate(['/', 'home'])
+    this._cookieService.delete('token');
+    this.onSession();
+  }
 
 }

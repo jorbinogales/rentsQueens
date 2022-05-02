@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="container">
+
+        <h4 class="mt-5">Welcome!</h4>
+
+        <div style="position: relative;" class="mt-3">
+            <h4>My apartaments</h4>
+            <button 
+            [routerLink]="['/','dashboard','create-apartament']"
+            id="createApartament" 
+            class="btn btn-success">
+                Create Apartament
+            </button>
+        </div>
+        <div *ngIf="apartaments.items.length == 0" class="card-body">
+            <div class="alert alert-danger">
+                You not have apartament created 
+                <button class="btn btn-light ml-5" [routerLink]="['/','dashboard','create-apartament']">Create my first apartament</button>
+            </div>
+        </div>
+
+        <div class="row mt-5" *ngIf="apartaments.items.length > 0" >
+            <div 
+                class="col-6 col-lg-4 m-0 p-1" 
+                *ngFor="let apartament of apartaments.items" 
+                >
+                <app-card [departament]="apartament"></app-card>
+            </div>
+        </div>
+        
+    </div>
+</div>

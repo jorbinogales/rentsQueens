@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { DepartamentComponent } from './departament/departament.component';
 import { DepartamentModule } from './departament/departament.module';
+import { LoadingModule } from './loading/loading.module';
 @NgModule({
   imports: [
     FilterModule,
@@ -13,12 +14,14 @@ import { DepartamentModule } from './departament/departament.module';
     NavbarModule,
     CardModule,
     DepartamentModule,
+    LoadingModule,
   ], 
   exports:[ 
     FilterModule,
     CardModule,
     NavbarModule,
     DepartamentModule,
+    LoadingModule,
   ],
 })
 export class ComponentsModule { }

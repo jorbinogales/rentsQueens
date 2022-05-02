@@ -2,6 +2,18 @@ ul{
     list-style: none;
 }
 
+.card-body{
+    min-height:250px;
+}
+
+.card{
+    cursor: pointer;  
+}
+
+.card:hover{
+    box-shadow: 0px 0px 15px 0px rgba(50,50,50,.5);
+}
+
 .icon-card{
     width:18px;
     height:15px;

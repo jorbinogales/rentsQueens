@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { HomePagesRounting } from './home-page.routing';
+import { HomeInitComponent } from './init/home-init.component';
 import { CardModule } from 'src/app/components/card/card.module';
 import { FilterModule } from 'src/app/components/filter/filter.module';
 import { DepartamentModule } from 'src/app/components/departament/departament.module';
+import { HomeInitService } from './init/home-init.service';
+import { HomeInitResolver } from './init/home-init.resolver';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeInitComponent,
   ],
   imports: [
     CommonModule,
-    NavbarModule,
     CardModule,
     FilterModule,
     DepartamentModule,
+    HomePagesRounting,
   ],
-  exports: [
-    HomeComponent
-  ]
 })
-export class HomeModule { }
+export class HomePagesModule { }
