@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit {
     const form = this.form.getRawValue();
     this._navbarService.login(form).subscribe((resp:any) =>{
       this.error = null;
+      this.form.reset();
       this._cookieService.set('token', resp.access_token),
       this._router.navigate(['/', 'dashboard']);
       this.onSession();

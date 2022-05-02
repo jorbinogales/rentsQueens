@@ -126,6 +126,7 @@ export class CreateApartamentComponent implements OnInit {
     })
     this._createApartamentService.uploadImageApartament(id_apartament, files).subscribe((resp:any) =>{
       this.error = null;
+      this._router.navigate(['/', 'dashboard']);
       this.loading = false;
     }, (err) => {
       this.error = err.error.message;
