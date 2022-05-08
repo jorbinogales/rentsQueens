@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">RentsQueens</a>
+    <a class="navbar-brand" href="#">RentsBrooklynQueens</a>
     <button 
-    class="btn btn-success" 
+    class="btn btn-danger" 
     id="loginBtn"
     data-toggle="modal" 
     data-target="#loginModal"
@@ -17,10 +17,6 @@
     (click)="logout()"
     >
       Log out
-    </button>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
 
@@ -63,8 +59,7 @@
                 </div>
                 <button 
                 type="submit" 
-                class="btn btn-success d-block m-auto w-100" 
-                [disabled]="form.invalid"
+                class="btn btn-danger d-block m-auto w-100"
                 id="signIn">
                   Sign In
                 </button>

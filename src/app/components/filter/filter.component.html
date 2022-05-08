@@ -2,91 +2,286 @@
 <div class="row">
     <div class="col-12">
      
-        <form class="d-block w-100 m-auto  align-items-center justify-center">
+        <form 
+        [formGroup]="form" (submit)="sendFilter()"
+        class="w-100 m-auto align-items-center justify-center d-none d-sm-none d-md-none d-lg-block">
             <strong class="d-block mt-3">Option Filter</strong>
             <div class="form-row align-items-center w-100">
                 <div class="col">
-                    <div class="form-group">
-                        <input 
-                        type="number" 
-                        class="form-control mt-3"  
-                        id="filter_pisos" 
-                        min="0"
-                        placeholder="Floors"
-                        >
-                    </div>
-                </div>
-
-                <div class="col">
-                    <select class="custom-select" id="filter_credit">
-                        <option selected>Credit</option>
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                    <select 
+                    class="custom-select"
+                    id="floors_filter"
+                    formControlName="floors"
+                    name="floors"
+                     >
+                        <option  value="null" selected>Floors</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="penthouse">Penthouse</option>
+                        <option value="4">Others</option>
                     </select>
                 </div>
 
                 <div class="col">
-                    <div class="form-group">
+                    <select 
+                    formControlName="credit"
+                    name="credit"
+                    class="custom-select"
+                    id="credit_filter">
+                        <option  value="null" selected>Credit</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="beds"
+                    name="beds"
+                    class="custom-select"
+                    id="beds_filter">
+                        <option  value="null" selected>Beds</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="full_house">Full house</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="baths"
+                    name="baths"
+                    class="custom-select" id="baths_filter">
+                        <option value="null" selected>Baths</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="more_than_3">More than 3</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="price"
+                    name="price"
+                    class="custom-select" 
+                    id="price_filter">
+                        <option  value="null" selected>Price</option>
+                        <option value="0_1000">less than $1000</option>
+                        <option value="1000_1700">$1000 and $1700</option>
+                        <option value="1701_2200">$1701 and $2200</option>
+                        <option value="2201_2900">$2201 and $2900 </option>
+                        <option value="2901">more than $2901</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="parking"
+                    name="parking"
+                    class="custom-select"
+                     id="parking_filter">
+                        <option value="null" selected>Parking</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="trains"
+                    name="trains"
+                    class="custom-select" id="trains_filter">
+                        <option value="null" selected>Trains</option>
+                        <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
+                    </select>
+                </div>
+
+                <div class="col">
                         <input 
+                        formControlName="id"
+                        name="id"
                         type="number" 
-                        class="form-control mt-3"  
+                        class="form-control mt-0"  
                         id="filter_bedrooms" 
                         min="0"
-                        placeholder="Beds"
+                        placeholder="Id"
                         >
-                    </div>
                 </div>
 
                 <div class="col">
-                    <div class="form-group">
-                        <input 
-                        type="number" 
-                        class="form-control mt-3"  
-                        id="filter_bathrooms" 
-                        min="0"
-                        placeholder="baths"
-                        >
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-group">
-                        <input 
-                        type="number" 
-                        class="form-control mt-3"  
-                        id="filter_price" 
-                        min="0"
-                        placeholder="Price"
-                        >
-                    </div>
-                </div>
-
-                <div class="col">
-                    <select class="custom-select" id="filter_credit">
-                        <option selected>Parking</option>
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
-                    </select>
-                </div>
-
-                <div class="col">
-                    <button class="btn btn-warning">
-                        <span class="material-icons">
+                    <button type="submit" class="btn btn-danger">
+                        <span  class="material-icons">
                             search
                         </span>                            
                     </button>
                 </div>
-
                 <div class="col">
-                    <button class="btn btn-danger">
-                        <span class="material-icons">
+                    <button class="btn btn-danger" (click)="refreshFilter()">
+                        <span 
+                        class="material-icons">
                             clear
-                        </span>
+                        </span>                            
                     </button>
                 </div>
-
             </div>
         </form>
+
+        <button 
+        class="d-block w-100 d-lg-none btn btn-danger mt-5" 
+        id="filterBtnMobile"
+        (click)="refreshFilter()"
+        >
+            Refresh Filter
+        </button>
+        <button 
+        class="d-block w-100 d-lg-none btn btn-danger mt-2" 
+        id="filterBtnMobile"
+        data-toggle="modal" 
+        data-target="#modalFilterMobile"
+        >
+            Filter
+        </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalFilterMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+            <h5 class="text-center d-block m-auto">Option Filter</h5>
+            <form 
+            [formGroup]="form" (submit)="sendFilter()"
+            class="w-100 m-auto align-items-center justify-center">
+                <div class="form-row align-items-center w-100">
+                    <div class="col-12 mt-3">
+                        <select 
+                        class="custom-select"
+                        id="floors_filter"
+                        formControlName="floors"
+                        name="floors"
+                         >
+                            <option  value="null" selected>Floors</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="penthouse">Penthouse</option>
+                            <option value="4">Others</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="credit"
+                        name="credit"
+                        class="custom-select"
+                        id="credit_filter">
+                            <option  value="null" selected>Credit</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="beds"
+                        name="beds"
+                        class="custom-select"
+                        id="beds_filter">
+                            <option  value="null" selected>Beds</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="full_house">Full house</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="baths"
+                        name="baths"
+                        class="custom-select" id="baths_filter">
+                            <option value="null" selected>Baths</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="more_than_3">More than 3</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="price"
+                        name="price"
+                        class="custom-select" 
+                        id="price_filter">
+                            <option  value="null" selected>Price</option>
+                            <option value="0_1000">less than $1000</option>
+                            <option value="1000_1700">$1000 and $1700</option>
+                            <option value="1701_2200">$1701 and $2200</option>
+                            <option value="2201_2900">$2201 and $2900 </option>
+                            <option value="2901">more than $2901</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="parking"
+                        name="parking"
+                        class="custom-select"
+                         id="parking_filter">
+                            <option value="null" selected>Parking</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="trains"
+                        name="trains"
+                        class="custom-select" id="trains_filter">
+                            <option value="null" selected>Trains</option>
+                            <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                            <input 
+                            formControlName="id"
+                            name="id"
+                            type="number" 
+                            class="form-control mt-0"  
+                            id="filter_bedrooms" 
+                            min="0"
+                            placeholder="Id"
+                            >
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-danger d-block m-auto">
+                            Filter Now                        
+                        </button>
+                        <button 
+                        id="closeModalFilter"
+                        class="btn btn-danger d-none m-auto"
+                        data-dismiss="modal">
+                           Close Modal                  
+                        </button>
+                    </div>
+                </div>
+            </form>
+          </div>
+      </div>
     </div>
 </div>
 

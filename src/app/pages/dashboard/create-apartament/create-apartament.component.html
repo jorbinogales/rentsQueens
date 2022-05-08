@@ -62,18 +62,33 @@
                                 name="address">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <input 
-                                type="number" 
+                                type="text" 
                                 class="form-control" 
-                                id="floors"
-                                placeholder="Floors"
-                                formControlName="floors"
-                                name="floors">
+                                id="phone"
+                                placeholder="Phone"
+                                formControlName="phone"
+                                name="phone">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Floors</label>
+                            <select 
+                            class="custom-select" 
+                            id="floors_filter"
+                            id="floors"
+                            formControlName="floors"
+                            >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="penthouse">Penthouse</option>
+                                <option value="others">Others</option>
+                            </select>
                             <div 
                                class="text-danger mt-2"
                                 *ngIf="error &&  error.indexOf('floors must be a number conforming to the specified constraints') > -1">
@@ -81,15 +96,21 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                                <input 
-                                type="number" 
-                                class="form-control" 
-                                id="bedrooms"
-                                placeholder="Beds"
-                                formControlName="bedrooms"
-                                name="bedrooms">
-                            </div>
+                            <label>Bedrooms</label>
+                            <select 
+                            class="custom-select" 
+                            id="beds_filter"
+                            formControlName="bedrooms"
+                            name="bedrooms"
+                            >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="full_house">Full house</option>
+                            </select>
                             <div 
                                class="text-danger mt-2"
                                 *ngIf="error &&  error.indexOf('bedrooms must be a number conforming to the specified constraints') > -1">
@@ -97,15 +118,33 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                                <input 
-                                type="number" 
-                                class="form-control" 
-                                id="bathrooms"
-                                placeholder="Baths"
-                                formControlName="bathrooms"
-                                name="bathrooms">
+                            <label>Bathrooms</label>
+                            <select 
+                            class="custom-select"
+                             id="bathrooms"
+                             formControlName="bathrooms"
+                             name="bathrooms">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="more_than_3">More than 3</option>
+                            </select>
+                            <div 
+                               class="text-danger mt-2"
+                                *ngIf="error &&  error.indexOf('bathrooms must be a number conforming to the specified constraints') > -1">
+                                    This value is required
                             </div>
+                        </div>
+                        <div class="col">
+                            <label>Trains</label>
+                            <select 
+                            class="custom-select" 
+                            id="train"
+                            formControlName="train"
+                            name="train" 
+                            >
+                                <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
+                            </select>
                             <div 
                                class="text-danger mt-2"
                                 *ngIf="error &&  error.indexOf('bathrooms must be a number conforming to the specified constraints') > -1">
@@ -113,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col">
                             <p>Credit</p>
                             <div class="custom-control custom-switch">

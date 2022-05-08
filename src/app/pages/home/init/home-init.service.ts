@@ -17,9 +17,33 @@ export class HomeInitService {
         return this._apartament.asObservable();
     }
 
-    getAparments(): Promise<any>
+    getAparments(data?: any, page?:any): Promise<any>
     {
-     
-        return this._http.post<any>(`${environment.MS_USER_API}/departament/paginate`, {}).toPromise();
+        
+        let form = {};
+        if(data){
+
+            if(data.credit != null && data.credit != "null"){
+                data.credit = (data.credit == 'true' ? true : false);
+            }
+
+            if(data.parking != null && data.parking != "null"){
+                data.parking = (data.parking == 'true' ? true : false);
+            }
+
+            form = {
+                floors: (data.floors == "null" ? null : data.floors ),
+                credit: (data.credit == "null" ? null : data.credit),
+                bedrooms: (data.beds == "null" ? null : data.beds ),
+                bathrooms: (data.baths == "null" ? null : data.baths ),
+                price: (data.price == "null" ? null : data.price ),
+                parking: (data.parking == "null" ? null : data.parking),
+                id: (data.id == "null" ? null : parseInt(data.id)),
+                train: (data.id == "null" ? null : parseInt(data.trains)),
+            }
+        }
+
+        page = (page == null ? 1 : page);
+        return this._http.post<any>(`${environment.MS_USER_API}/departament/paginate?page=`+page, form).toPromise();
     }
 }

@@ -21,6 +21,7 @@ export class CreateApartamentComponent implements OnInit {
   ulpoadedFiles: any = [];
   currentProcessingImg: any = 0;
   imgId: any=0;
+  trains: any;
 
 
   constructor(
@@ -31,6 +32,10 @@ export class CreateApartamentComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this._createApartamentService.getTrains().then((resp)=>{
+      this.trains = resp;
+      console.log(this.trains);
+    })
   }
 
   onCloseHandled() {
@@ -92,10 +97,12 @@ export class CreateApartamentComponent implements OnInit {
     this.form = this._formBuilder.group({
       title: ['', Validators.required],
       price: [, Validators.required],
+      phone: [],
       address: ['', Validators.required],
-      floors: [],
-      bedrooms: [],
-      bathrooms: [],
+      floors: ['', Validators.required],
+      bedrooms: ['', Validators.required],
+      bathrooms: ['', Validators.required],
+      train: ['', Validators.required],
       credit: [false],
       parking: [false],
       pets: [false],

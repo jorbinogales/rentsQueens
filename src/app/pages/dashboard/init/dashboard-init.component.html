@@ -12,12 +12,13 @@
                 Create Apartament
             </button>
         </div>
-        <div *ngIf="apartaments.items.length == 0" class="card-body">
+        <div *ngIf="apartaments.items.length == 0" class="card-body mt-5">
             <div class="alert alert-danger">
                 You not have apartament created 
                 <button class="btn btn-light ml-5" [routerLink]="['/','dashboard','create-apartament']">Create my first apartament</button>
             </div>
         </div>
+
 
         <div class="row mt-5" *ngIf="apartaments.items.length > 0" >
             <div 
@@ -27,6 +28,20 @@
                 <app-card [departament]="apartament"></app-card>
             </div>
         </div>
-        
+
+        <pagination-controls  
+                id="some_id"
+                (pageChange)="pageChanged($event)"
+                (pageBoundsCorrection)="pageChanged($event)"
+                [maxSize]="paginationControl.maxSize"
+                [directionLinks]="paginationControl.directionLinks"
+                [autoHide]="paginationControl.autoHide"
+                [responsive]="paginationControl.responsive"
+                previousLabel="Previous"
+                nextLabel="Next"
+                screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page"
+                screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
     </div>
 </div>

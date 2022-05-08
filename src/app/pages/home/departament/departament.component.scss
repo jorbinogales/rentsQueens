@@ -1,0 +1,28 @@
+.image-item{
+  background-size:cover;
+  background-position: center;
+  min-height: 350px;
+}
+
+.list{
+  list-style-type: none;
+}
+
+.list .material-icons{
+  color: #717578;
+}
+
+.list .icon-card{
+  width: 25px;
+}
+
+.list li{
+  margin-top:15px;
+}
+
+.train-badged{
+  position:absolute;
+  top:0;
+  right:0;
+  padding: 15px 10px;
+}

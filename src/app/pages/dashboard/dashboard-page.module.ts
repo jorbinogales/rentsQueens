@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptorModule } from 'src/app/interceptor/jwt-interceptor.module';
 import { LoadingModule } from 'src/app/components/loading/loading.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     CreateApartamentComponent,
   ],
   imports: [
+    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

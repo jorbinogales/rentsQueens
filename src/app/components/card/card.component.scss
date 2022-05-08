@@ -2,12 +2,19 @@ ul{
     list-style: none;
 }
 
+ul .material-icons{
+    color: #717578;
+    font-size:21px;
+    margin-top:2px;
+  }
+
 .card-body{
     min-height:250px;
 }
 
 .card{
     cursor: pointer;  
+    min-height: 450px;
 }
 
 .card:hover{
@@ -25,4 +32,10 @@ ul{
 
 .departament:hover{
     box-shadow: 0px 0px 15px 0px rgba(50,50,50,.5);
+}
+
+@media only screen and (min-width:968px){
+    .card{
+        min-height: 285px;
+    }
 }

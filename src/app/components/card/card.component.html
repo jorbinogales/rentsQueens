@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [routerLink]="['', 'home', departament.id]">
     <div class="card-body p-2">
         <strong>{{ departament.title }}</strong>
         <p>{{ departament.address }}</p>
@@ -21,19 +21,39 @@
                 <ul class="m-0 p-0">
                     <li>
                         <img class="icon-card" src="assets/icons/room-icon.png">
-                        <span class="ml-3">{{departament.bedrooms }} Bedrooms</span>
+                        <span class="ml-3" *ngIf="departament.bedrooms != 'full_house'">
+                            {{departament.bedrooms }} Bedrooms
+                        </span>              
+                        <span class="ml-3" *ngIf="departament.bedrooms == 'full_house'">
+                            Full House
+                        </span>  
                     </li>
                     <li *ngIf="departament.credit">
                         <img class="icon-card" src="assets/icons/credit-icon.png">
-                        <span class="ml-3">Credit</span>
+                        <span class="ml-3">
+                            Credit
+                        </span>
                     </li>
                     <li>
                         <img class="icon-card" src="assets/icons/bathroom-icon.png">
-                        <span class="ml-3">{{departament.bathrooms}} Bathrooms</span>
+                        <span class="ml-3" *ngIf="departament.bathrooms != 'more_than_3'">
+                            {{departament.bathrooms }} Bathrooms
+                        </span>
+                        <span class="ml-3" *ngIf="departament.bathrooms == 'more_than_3'">
+                         More 3 Baths
+                        </span>
                     </li>
                     <li *ngIf="departament.parking">
                         <img class="icon-card" src="assets/icons/garage-icon.png">
-                        <span class="ml-3">Parking</span>
+                        <span class="ml-3">
+                            Parking
+                        </span>
+                    </li>
+                    <li *ngIf="departament.pets">
+                        <span class="material-icons">
+                            pets
+                        </span>
+                        <span class="ml-3">Pets</span>
                     </li>
                 </ul>
             </div>

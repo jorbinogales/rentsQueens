@@ -12,6 +12,14 @@ export class DashboardInitComponent implements OnInit {
   loading: boolean = true;
   apartaments: any;
 
+  
+  paginationControl = {
+    maxSize: 9,
+    directionLinks: false,
+    autoHide: false,
+    responsive: false
+  }
+
   constructor(
     private readonly _dashboardInitService: DashboardInitService,
   ) { } 
@@ -22,6 +30,11 @@ export class DashboardInitComponent implements OnInit {
       this.loading = false;
       this.apartaments = resp;
     })
+  }
+
+  async pageChanged(event): Promise<any>{
+    console.log(event);
+    this.loading = true;
   }
 
 }
