@@ -16,9 +16,9 @@ export class DashboardInitService {
         return this._apartament.asObservable();
     }
 
-    getAparments(): Promise<any>
+    async getAparments(page?:number): Promise<any>
     {
-     
-        return this._http.post<any>(`${environment.MS_USER_API}/departament/paginate/user`, {}).toPromise();
+        page = (page == null ? 1 : page);
+        return await this._http.post<any>(`${environment.MS_USER_API}/departament/paginate/user?page=`+page, {}).toPromise();
     }
 }

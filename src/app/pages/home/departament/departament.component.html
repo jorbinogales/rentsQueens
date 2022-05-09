@@ -112,6 +112,14 @@
           <h2 class="d-block text-right">
             <span class="badge badge-pill badge-danger">${{ apartament.price }}</span>
           </h2>
+          <h5 class="d-block text-right" *ngIf="session">
+            <span class="badge badge-pill badge-light">
+              <span class="material-icons">
+                call
+              </span>
+              {{ apartament.phone }}
+            </span>
+          </h5>
       </div>
     </div>
 

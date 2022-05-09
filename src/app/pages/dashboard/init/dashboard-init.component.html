@@ -19,29 +19,36 @@
             </div>
         </div>
 
+        <div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+            <pagination-controls 
+            class="my-pagination"
+            (pageChange)="pageChanged($event)"
+            [maxSize]="apartaments.meta.totalPages"
+            ></pagination-controls>
+        </div>        
+
 
         <div class="row mt-5" *ngIf="apartaments.items.length > 0" >
             <div 
                 class="col-6 col-lg-4 m-0 p-1" 
-                *ngFor="let apartament of apartaments.items" 
+                *ngFor="
+                    let apartament of apartaments.items | paginate: { 
+                        itemsPerPage: apartaments.meta.itemsPerPage, 
+                        currentPage: apartaments.meta.currentPage,
+                        totalItems: apartaments.meta.totalItems 
+                    }"  
                 >
                 <app-card [departament]="apartament"></app-card>
             </div>
         </div>
 
-        <pagination-controls  
-                id="some_id"
-                (pageChange)="pageChanged($event)"
-                (pageBoundsCorrection)="pageChanged($event)"
-                [maxSize]="paginationControl.maxSize"
-                [directionLinks]="paginationControl.directionLinks"
-                [autoHide]="paginationControl.autoHide"
-                [responsive]="paginationControl.responsive"
-                previousLabel="Previous"
-                nextLabel="Next"
-                screenReaderPaginationLabel="Pagination"
-                screenReaderPageLabel="page"
-                screenReaderCurrentLabel="You're on page">
-        </pagination-controls>
+        <div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+            <pagination-controls 
+            class="my-pagination"
+            (pageChange)="pageChanged($event)"
+            [maxSize]="apartaments.meta.totalPages"
+            ></pagination-controls>
+        </div>
+        
     </div>
 </div>

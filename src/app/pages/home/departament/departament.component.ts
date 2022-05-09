@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject, takeUntil } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HomeDepartamentService } from './departament.service';
@@ -16,12 +17,16 @@ export class HomeDepartamentComponent implements OnInit {
   apartament: any;
   url: string;
   apartaments: any;
+  session: boolean = false;
 
   constructor(
+    private readonly _cookieService: CookieService,
     private readonly _homeDepartamentService: HomeDepartamentService
   ) { } 
 
+ 
   ngOnInit(): void {
+    this.onSession();
     this.url = environment.MS_USER_API;
     /* GET QUESTION */
     this._homeDepartamentService.apartament$
@@ -37,4 +42,10 @@ export class HomeDepartamentComponent implements OnInit {
       this.apartaments = resp;
     })
   }
+
+  private onSession(){
+    const token = this._cookieService.get('token');
+    token ? this.session = true : this.session = false;
+  }
+
 }

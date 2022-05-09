@@ -32,9 +32,18 @@ export class DashboardInitComponent implements OnInit {
     })
   }
 
-  async pageChanged(event): Promise<any>{
-    console.log(event);
+  async getDataFromFilter(page?: number){
     this.loading = true;
+    await  this._dashboardInitService.getAparments(page).then((resp:any) =>{
+      this.loading = false;
+      this.apartaments = resp;
+    }, (err) => {
+      this.loading = false;
+    })
+  }
+
+  async pageChanged(event): Promise<any>{
+    await this.getDataFromFilter(event);
   }
 
 }
