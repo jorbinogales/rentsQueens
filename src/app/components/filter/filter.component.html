@@ -103,6 +103,16 @@
                 </div>
 
                 <div class="col">
+                    <select 
+                    formControlName="trains"
+                    name="trains"
+                    class="custom-select" id="trains_filter">
+                        <option value="null" selected>City</option>
+                        <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
+                    </select>
+                </div>
+
+                <div class="col">
                         <input 
                         formControlName="id"
                         name="id"

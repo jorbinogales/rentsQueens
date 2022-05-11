@@ -22,6 +22,7 @@ export class CreateApartamentComponent implements OnInit {
   currentProcessingImg: any = 0;
   imgId: any=0;
   trains: any;
+  cities: any;
 
 
   constructor(
@@ -34,7 +35,9 @@ export class CreateApartamentComponent implements OnInit {
     this.buildForm();
     this._createApartamentService.getTrains().then((resp)=>{
       this.trains = resp;
-      console.log(this.trains);
+    });
+    this._createApartamentService.getCity().then((resp)=>{
+      this.cities = resp;
     })
   }
 
@@ -103,6 +106,7 @@ export class CreateApartamentComponent implements OnInit {
       bedrooms: ['', Validators.required],
       bathrooms: ['', Validators.required],
       train: ['', Validators.required],
+      city: ['', Validators.required],
       credit: [false],
       parking: [false],
       pets: [false],

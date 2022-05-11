@@ -13,25 +13,60 @@
       {{ apartament.title }} 
     </h2>
     <h4>
-      {{ apartament.address }}
+      <span 
+      *ngIf="apartament.city_value.name"
+      class="badge-pill badge-danger pr-2 pl-2">
+        City: {{ apartament.city_value.name }}
+      </span>
+      <p>
+        {{ apartament.address }}
+      </p>
+      <span 
+      *ngIf="apartament.user_value.name"
+      class="float-right badge-pill badge-danger pr-2 pl-2">
+        Agent: {{ apartament.user_value.name }}
+      </span>
     </h4>
+
+    
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
+      <div class="carousel-inner" *ngIf="apartament.image_values.length > 0">
         <div 
             class="carousel-item"
             *ngFor="let image_value of apartament.image_values; let i = index"
             [ngClass]="i == 0 ? 'active' : ''" >
-            <img 
-            class="d-block w-100 h-100 image-item" 
-            style="background-image: url('{{url+'/'+image_value.image}}');"
-            >
+              <img 
+              class="d-block w-100 h-100 image-item" 
+              style="background-image: url('{{url+'/'+image_value.image}}');"
+              >
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+
+      
+      <div class="carousel-inner" *ngIf="apartament.image_values.length == 0">
+          <div 
+              class="carousel-item active">
+                <img 
+                class="d-block w-100 h-100 image-item" 
+                style="background-image: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png');"
+                >
+          </div>
+      </div>
+      <a 
+      *ngIf="apartament.image_values.length > 1"
+      class="btn-danger carousel-control-prev"
+      href="#carouselExampleControls" 
+      role="button" 
+      data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <a 
+      *ngIf="apartament.image_values.length > 1"
+      class="btn-danger carousel-control-next" 
+      href="#carouselExampleControls" 
+      role="button" 
+      data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -88,6 +123,14 @@
             <span class="badge-light p-2">
               <img class="icon-card" src="assets/icons/garage-icon.png">
               <span class="ml-3">Parking</span>
+            </span>
+          </li>
+          <li>
+            <span class="badge-light p-2">
+              <span class="material-icons">
+                location_city
+              </span>
+              <span class="ml-3">City: {{ apartament.city_value.name }}</span>
             </span>
           </li>
           <li>

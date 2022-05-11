@@ -13,6 +13,7 @@ export class FilterComponent implements OnInit {
 
   form: any = FormGroup;
   trains: any;
+  cities: any;
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _filterService: FilterService
@@ -22,6 +23,9 @@ export class FilterComponent implements OnInit {
     this.buildForm();
     this._filterService.getTrains().then((resp)=> {
       this.trains = resp;
+    })
+    this._filterService.getCity().then((resp)=> {
+      this.cities = resp;
     })
   }
 
@@ -33,6 +37,7 @@ export class FilterComponent implements OnInit {
       baths: [],
       price: [],
       trains: [],
+      city: [],
       parking: [],
       id: [],
     });

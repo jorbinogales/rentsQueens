@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { ApartamentInterface } from "src/app/interface/apartament.interface";
+import { CityInterface } from 'src/app/interface/city.interface';
 import { environment } from "src/environments/environment";
 import { TrainInterface } from '../../../interface/train.interface';
 
@@ -9,6 +10,7 @@ import { TrainInterface } from '../../../interface/train.interface';
     providedIn: 'root'
 })
 export class CreateApartamentService {
+    public _city: BehaviorSubject<CityInterface | null> = new BehaviorSubject(null);
     public _train: BehaviorSubject<TrainInterface | null> = new BehaviorSubject(null);
     public _apartament: BehaviorSubject<ApartamentInterface | null> = new BehaviorSubject(null);
 
@@ -24,9 +26,19 @@ export class CreateApartamentService {
         return this._train.asObservable();
     }
 
+    get city$(): Observable<CityInterface>
+    {
+        return this._city.asObservable();
+    }
+
     getTrains(): Promise<any>
     {
         return this._http.get<any>(`${environment.MS_USER_API}/trains/index`).toPromise();
+    }
+
+    getCity(): Promise<any>
+    {
+        return this._http.get<any>(`${environment.MS_USER_API}/city/index`).toPromise();
     }
 
     createApartament(form: any): Observable<ApartamentInterface>
@@ -42,6 +54,7 @@ export class CreateApartamentService {
             credit: form.credit,
             pets: form.pets,
             train: parseInt(form.train),
+            city: parseInt(form.city),
             parking: form.parking,
             phone: form.phone
         }

@@ -6,13 +6,13 @@
             <div class="col-12 col-lg-7 p-0 m-0">
                 <img 
                 *ngIf="departament.image_values.length > 0"
-                src="{{url+'/'+departament.image_values[0].image}}" 
-                class="w-100 m-auto">
+                class="w-100 m-auto card-image"
+                style="background: url('{{url+'/'+departament.image_values[0].image}}')">
 
                 <img
                 *ngIf="departament.image_values.length == 0"
-                class="w-100 m-auto"
-                src="https://sobreplanos.s3.amazonaws.com/uploads/real_estate_attachment/picture/6214167/aria_departamentos_en_venta_en_centro_de_monterrey_de_1_3_hab_cover_c00bc0d6490933f2d8f2.jpg"
+                class="w-100 m-auto card-image"
+                style="background: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png')"
                 >
             </div>
             <div class="col-12 col-lg-5 p-2 m-0">

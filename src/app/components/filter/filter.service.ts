@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
+import { CityInterface } from 'src/app/interface/city.interface';
 import { environment } from "src/environments/environment";
 import { TrainInterface } from '../../interface/train.interface';
 
@@ -8,6 +9,8 @@ import { TrainInterface } from '../../interface/train.interface';
     providedIn: 'root'
 })
 export class FilterService {
+
+    public _city: BehaviorSubject<CityInterface | null> = new BehaviorSubject(null);
     public _train: BehaviorSubject<TrainInterface | null> = new BehaviorSubject(null);
 
     constructor(private _http : HttpClient){}
@@ -17,8 +20,19 @@ export class FilterService {
         return this._train.asObservable();
     }
 
+    get city$(): Observable<CityInterface>
+    {
+        return this._city.asObservable();
+    }
+
+
     getTrains(): Promise<any>
     {
         return this._http.get<any>(`${environment.MS_USER_API}/trains/index`).toPromise();
+    }
+
+    getCity(): Promise<any>
+    {
+        return this._http.get<any>(`${environment.MS_USER_API}/city/index`).toPromise();
     }
 }

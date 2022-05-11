@@ -40,6 +40,7 @@ export class HomeInitService {
                 parking: (data.parking == "null" ? null : data.parking),
                 id: (data.id == "null" ? null : parseInt(data.id)),
                 train: (data.id == "null" ? null : parseInt(data.trains)),
+                city: (data.id == "null" ? null : parseInt(data.city)),
             }
         }
 
