@@ -14,6 +14,7 @@ export class HomeInitComponent implements OnInit {
   loading: boolean = true;
   apartaments: any;
   p: number = 1;
+  error: boolean = false;
 
   paginationControl = {
     maxSize: 9,
@@ -29,12 +30,17 @@ export class HomeInitComponent implements OnInit {
   ) { } 
 
   ngOnInit(): void {
+    this.loading = true;
     const token = this._cookieService.get('token');
     token ? this._router.navigate(['', 'dashboard']) : this._router.navigate(['', 'home']);
 
     this._homeInitService.getAparments().then((resp)=> {
+      this.error = false;
       this.loading = false;
       this.apartaments = resp;
+    } , (err) =>{
+      console.log('err', err);
+      this.error = true;
     })
   }
 
@@ -42,9 +48,11 @@ export class HomeInitComponent implements OnInit {
     this.loading = true;
     const form = e;
     await  this._homeInitService.getAparments(form, page).then((resp:any) =>{
+      this.error = false;
       this.loading = false;
       this.apartaments = resp;
     }, (err) => {
+      this.error = true;
       this.loading = false;
     })
   }

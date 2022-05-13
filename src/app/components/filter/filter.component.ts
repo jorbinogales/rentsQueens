@@ -40,6 +40,7 @@ export class FilterComponent implements OnInit {
       city: [],
       parking: [],
       id: [],
+      search: [],
     });
   }
 

@@ -5,8 +5,19 @@
         <form 
         [formGroup]="form" (submit)="sendFilter()"
         class="w-100 m-auto align-items-center justify-center d-none d-sm-none d-md-none d-lg-block">
-            <strong class="d-block mt-3">Option Filter</strong>
-            <div class="form-row align-items-center w-100">
+            <div class="form-row w-100 mt-3">
+                <div class="col-2">
+                    <input 
+                        formControlName="search"
+                        name="search"
+                        type="text" 
+                        class="form-control mt-0"  
+                        id="filter_search" 
+                        placeholder="Search"
+                    >
+                </div>
+            </div>
+            <div class="form-row align-items-center w-100 mt-3">
                 <div class="col">
                     <select 
                     class="custom-select"
@@ -14,11 +25,11 @@
                     formControlName="floors"
                     name="floors"
                      >
-                        <option  value="null" selected>Floors</option>
+                        <option  value="null" selected>Floor</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="penthouse">Penthouse</option>
+                        <option value="ático">Ático</option>
                         <option value="4">Others</option>
                     </select>
                 </div>
@@ -73,9 +84,9 @@
                     id="price_filter">
                         <option  value="null" selected>Price</option>
                         <option value="0_1000">less than $1000</option>
-                        <option value="1000_1700">$1000 and $1700</option>
-                        <option value="1701_2200">$1701 and $2200</option>
-                        <option value="2201_2900">$2201 and $2900 </option>
+                        <option value="1000_1700">$1000 - $1700</option>
+                        <option value="1701_2200">$1701 - $2200</option>
+                        <option value="2201_2900">$2201 - $2900 </option>
                         <option value="2901">more than $2901</option>
                     </select>
                 </div>
@@ -120,7 +131,7 @@
                         class="form-control mt-0"  
                         id="filter_bedrooms" 
                         min="0"
-                        placeholder="Id"
+                        placeholder="ID"
                         >
                 </div>
 

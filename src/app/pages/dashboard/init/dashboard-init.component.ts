@@ -46,4 +46,14 @@ export class DashboardInitComponent implements OnInit {
     await this.getDataFromFilter(event);
   }
 
+  async changeStatus(id:number): Promise<any>{
+    await this._dashboardInitService.changeStatus(id);
+    await this.getDataFromFilter();
+  }
+
+  async deleteDepartament(id:number): Promise<any>{
+    await this._dashboardInitService.deleteDepertament(id);
+    await this.getDataFromFilter();
+  }
+
 }

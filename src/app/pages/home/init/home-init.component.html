@@ -1,6 +1,9 @@
 <app-filter (filterData)="getDataFromFilter($event)"></app-filter>
 
-<div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+<div 
+    *ngIf="apartaments.meta.totalPages > 1"
+    class="d-block" 
+    style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
     class="my-pagination"
     (pageChange)="pageChanged($event)"
@@ -8,19 +11,27 @@
     ></pagination-controls>
 </div>
 
-<div class="row mt-4">
-    
-    <div *ngIf="apartaments.items.length == 0">
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Not Found</h4>
-            <p>There are not apartaments to show you</p>
-            <hr>
-            <p class="mb-0">No apartment results found, please come back later.</p>
-          </div>
-    </div>
-    
-    <app-loading class="d-block mt-5"  *ngIf="loading == true"></app-loading>
+<div *ngIf="error === true">
+    <div class="alert alert-danger mt-3" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Something is wrong</p>
+        <hr>
+        <p class="mb-0">Apartaments are not loaded, try later.</p>
+      </div>
+</div>
 
+<div *ngIf="apartaments.items.length === 0">
+    <div class="alert alert-danger mt-3" role="alert">
+        <h4 class="alert-heading">Not Found</h4>
+        <p>There are not apartaments to show you</p>
+        <hr>
+        <p class="mb-0">No apartment results found, please come back later.</p>
+      </div>
+</div>
+
+<app-loading class="d-block mt-5"  *ngIf="loading === true"></app-loading>
+
+<div class="row mt-4" *ngIf="loading === false">
     <div 
         class="col-12 col-md-6 col-lg-4 m-0 p-1 mt-3" 
         *ngFor="
@@ -34,7 +45,10 @@
     </div>
 </div>
 
-<div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+<div 
+    *ngIf="apartaments.meta.totalPages > 1"
+    class="d-block" 
+    style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
     class="my-pagination"
     (pageChange)="pageChanged($event)"

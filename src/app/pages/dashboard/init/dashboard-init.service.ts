@@ -21,4 +21,12 @@ export class DashboardInitService {
         page = (page == null ? 1 : page);
         return await this._http.post<any>(`${environment.MS_USER_API}/departament/paginate/user?page=`+page, {}).toPromise();
     }
+
+    async changeStatus(id:number){
+        return await this._http.patch<any>(`${environment.MS_USER_API}/departament/${id}`, {}).toPromise();
+    }
+
+    async deleteDepertament(id:number){
+        return await this._http.delete<any>(`${environment.MS_USER_API}/departament/${id}`, {}).toPromise();
+    }
 }

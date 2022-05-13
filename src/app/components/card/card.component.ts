@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -9,13 +10,33 @@ import { environment } from "src/environments/environment";
 export class CardComponent implements OnInit {
 
   @Input() departament:any;
-  url: string;
+  @Output() status: EventEmitter<any> = new EventEmitter();
+  @Output() delete: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  url: string;
+  session: boolean = false;
+
+  constructor(
+    private readonly _cookieService: CookieService,
+  ) { }
 
   ngOnInit(): void {
     this.url = environment.MS_USER_API;
-    console.log(this.departament);
+    this.onSession();
+  }
+
+
+  private onSession(){
+    const token = this._cookieService.get('token');
+    token ? this.session = true : this.session = false;
+  }
+
+  changeStatus(id){
+    this.status.emit(id);
+  }
+
+  deleteDepartament(id){
+    this.delete.emit(id);
   }
 
 }

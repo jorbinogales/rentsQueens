@@ -1,5 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
-span,h1,h2,h3,h4,h5,p,i,label, input,select, button{
-  font-family: 'Open Sans'
+@font-face {
+  font-family: 'Avenir Black';
+  src: url('assets/fonts/Avenir/AvenirLTStd-Black.otf');
+}
+
+@font-face {
+  font-family: 'Avenir Book';
+  src: url('assets/fonts/Avenir/AvenirLTStd-Book.otf');
+}
+
+h1,h2,h3,h4,h5, button{
+  font-family: 'Avenir Black' !important;
+}
+
+.badge-danger{
+  background: #bd2424 !important;
+}
+
+p, i, label,input, select{
+  color:black;
+  font-family: 'Avenir Book' !important;
+}
+
+.btn-danger{
+  background: #bd2424 !important;
+}
+
+.ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: #bd2424 !important;
+  color: #fefefe;
+  cursor: default;
 }

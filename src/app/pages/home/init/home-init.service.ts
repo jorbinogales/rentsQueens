@@ -41,6 +41,7 @@ export class HomeInitService {
                 id: (data.id == "null" ? null : parseInt(data.id)),
                 train: (data.id == "null" ? null : parseInt(data.trains)),
                 city: (data.id == "null" ? null : parseInt(data.city)),
+                search: (data.seach == "null" ? null : data.search ),
             }
         }
 

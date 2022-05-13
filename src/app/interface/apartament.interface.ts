@@ -12,6 +12,7 @@ export interface ApartamentInterface {
     user_value: any,
     deleted_at: string,
     id: string,
+    status: boolean,
     created_at: string;
     updated_at: string
 }
