@@ -14,7 +14,7 @@
     </h2>
     <h4>
       <span 
-      *ngIf="apartament.city_value.name"
+      *ngIf="apartament.city_value"
       class="badge-pill badge-danger pr-2 pl-2">
         City: {{ apartament.city_value.name }}
       </span>
@@ -130,7 +130,9 @@
               <span class="material-icons">
                 location_city
               </span>
-              <span class="ml-3">City: {{ apartament.city_value.name }}</span>
+              <span *ngIf="apartament.city_value" class="ml-3">
+                City: {{ apartament.city_value.name }}
+              </span>
             </span>
           </li>
           <li>
