@@ -1,4 +1,8 @@
 <div class="card mt-3">
+    <div class="progress" *ngIf="loading">
+        <div class="progress-bar bg-danger progress-bar-indeterminate" role="progressbar"></div>
+    </div>
+    
     <div class="card-body p-2" 
         [routerLink]="['', 'home', departament.id]"
         [ngClass]="departament.status == 0 ? 'opacity-5' : ''" >
@@ -67,7 +71,8 @@
         <button 
         (click)="changeStatus(departament.id)"
         class="btn btn-danger mt-2 d-block w-100" 
-        *ngIf="departament.status == 1">
+        *ngIf="departament.status == 1"
+        [ngClass]="visibleBtn === true ? 'disabled' : ''">
             <span class="material-icons">
                 visibility_off
             </span>
@@ -76,7 +81,8 @@
         <button 
         (click)="changeStatus(departament.id)"
         class="btn btn-gray mt-2 d-block w-100" 
-        *ngIf="departament.status == 0">
+        *ngIf="departament.status == 0"
+        [ngClass]="visibleBtn === true ? 'disabled' : ''">
             <span class="material-icons">
                 visibility
             </span>
@@ -85,6 +91,7 @@
     </div>
     <div class="col-5">
         <button 
+        [ngClass]="deleteBtn === true ? 'disabled' : ''"
         (click)="deleteDepartament(departament.id)"
         class="btn btn-danger mt-2 d-block w-100">
             <span class="material-icons">

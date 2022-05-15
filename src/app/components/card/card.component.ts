@@ -13,6 +13,9 @@ export class CardComponent implements OnInit {
   @Output() status: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
+  visibleBtn: boolean = false;
+  deleteBtn: boolean = false;
+  loading: boolean = false;
   url: string;
   session: boolean = false;
 
@@ -32,10 +35,14 @@ export class CardComponent implements OnInit {
   }
 
   changeStatus(id){
+    this.visibleBtn = true;
+    this.loading = true;
     this.status.emit(id);
   }
 
   deleteDepartament(id){
+    this.deleteBtn = true;
+    this.loading = true;
     this.delete.emit(id);
   }
 
