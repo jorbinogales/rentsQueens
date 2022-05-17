@@ -33,7 +33,6 @@ export class HomeDepartamentComponent implements OnInit {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((apartament: any) => {
         this.apartament = apartament;
-        console.log(this.apartament);
         this.loading = false;
       })
       

@@ -1,4 +1,5 @@
 <div class="card mt-3">
+    
     <div class="progress" *ngIf="loading">
         <div class="progress-bar bg-danger progress-bar-indeterminate" role="progressbar"></div>
     </div>
@@ -20,6 +21,7 @@
                 class="w-100 m-auto card-image"
                 style="background: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png')"
                 >
+                <strong class="mt-2 d-block">Posted: {{ departament.created_at | date: 'yyyy-MM-dd h:mm a'}}</strong>
             </div>
             <div class="col-12 col-lg-5 p-2 m-0">
                 <h4 class="m-0">${{ departament.price }}</h4>

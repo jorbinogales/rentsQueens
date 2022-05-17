@@ -55,5 +55,4 @@ export class DashboardInitComponent implements OnInit {
     await this._dashboardInitService.deleteDepertament(id);
     await this.getDataFromFilter();
   }
-
 }

@@ -53,8 +53,14 @@ export class CreateApartamentComponent implements OnInit {
 
   fileChangeEvent(event: any): void {
     //Processing selected Images 
-    for (var i = 0; i < event.target.files.length; i++) {
-      this.imageProcess(event, event.target.files[i]);
+    console.log('file', event);
+    console.log('event target', event.target);
+    if(event.target == null){
+      this.imageProcess(event, event);
+    } else {
+      for (var i = 0; i < event.target.files.length; i++) {
+        this.imageProcess(event, event.target.files[i]);
+      } 
     }
   }
 
@@ -145,5 +151,15 @@ export class CreateApartamentComponent implements OnInit {
     })
   }
 
-
+  // PASTE IMAGE FROM CLIPBOARD
+  onPaste(e: any ) {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    let blob = null;
+    for (const item of items) {
+      if (item.type.indexOf('image') === 0) {
+        blob = item.getAsFile();
+        this.fileChangeEvent(item.getAsFile());
+      }
+    }
+  }
 }
