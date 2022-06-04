@@ -206,7 +206,7 @@ export class CreateApartamentComponent implements OnInit {
       this.form.controls['train'].setValue(
         apartament.train_value ? apartament.train_value.id : ''
       );
-      if (apartament.subcity_value.id) {
+      if (apartament.subcity_value) {
         await this.getSubCity(apartament.subcity_value.id);
         this.form.controls['city'].setValue(
           this.subcity.city_value ? this.subcity.city_value.id : ''
