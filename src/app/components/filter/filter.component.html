@@ -6,7 +6,8 @@
         [formGroup]="form" (submit)="sendFilter()"
         class="w-100 m-auto align-items-center justify-center d-none d-sm-none d-md-none d-lg-block">
             <div class="form-row w-100 mt-3">
-                <div class="col-2">
+                <div class="col-2 m-auto">
+                    <img src="assets/icons/logo.png" class="w-100 mb-3" style="max-wdith: 200px">
                     <input 
                         formControlName="search"
                         name="search"
@@ -18,6 +19,20 @@
                 </div>
             </div>
             <div class="form-row align-items-center w-100 mt-3">
+                
+
+                <div class="col">
+                    <input 
+                    formControlName="id"
+                    name="id"
+                    type="number" 
+                    class="form-control mt-0"  
+                    id="filter_bedrooms" 
+                    min="0"
+                    placeholder="ID"
+                    >
+                </div>
+
                 <div class="col">
                     <select 
                     class="custom-select"
@@ -25,12 +40,12 @@
                     formControlName="floors"
                     name="floors"
                      >
-                        <option  value="null" selected>Floor</option>
+                        <option  value="null" selected>Piso</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="ático">Ático</option>
-                        <option value="4">Others</option>
+                        <option value="4">Otro</option>
                     </select>
                 </div>
 
@@ -40,8 +55,8 @@
                     name="credit"
                     class="custom-select"
                     id="credit_filter">
-                        <option  value="null" selected>Credit</option>
-                        <option value="true">Yes</option>
+                        <option  value="null" selected>Credito</option>
+                        <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
                 </div>
@@ -52,7 +67,7 @@
                     name="beds"
                     class="custom-select"
                     id="beds_filter">
-                        <option  value="null" selected>Beds</option>
+                        <option  value="null" selected>Cuartos</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -68,11 +83,11 @@
                     formControlName="baths"
                     name="baths"
                     class="custom-select" id="baths_filter">
-                        <option value="null" selected>Baths</option>
+                        <option value="null" selected>Baños</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="more_than_3">More than 3</option>
+                        <option value="more_than_3">Más de 3</option>
                     </select>
                 </div>
 
@@ -82,12 +97,12 @@
                     name="price"
                     class="custom-select" 
                     id="price_filter">
-                        <option  value="null" selected>Price</option>
-                        <option value="0_1000">less than $1000</option>
-                        <option value="1000_1700">$1000 - $1700</option>
-                        <option value="1701_2200">$1701 - $2200</option>
-                        <option value="2201_2900">$2201 - $2900 </option>
-                        <option value="2901">more than $2901</option>
+                        <option  value="null" selected>Precio</option>
+                        <option value="0_1000">Menos de $1000</option>
+                        <option value="1000_1900">$1000 - $1900</option>
+                        <option value="1801_2400">$1901 - $2400</option>
+                        <option value="2401_3100">$2401 - $3100 </option>
+                        <option value="3101">Más de $3101</option>
                     </select>
                 </div>
 
@@ -97,8 +112,20 @@
                     name="parking"
                     class="custom-select"
                      id="parking_filter">
-                        <option value="null" selected>Parking</option>
-                        <option value="true">Yes</option>
+                        <option value="null" selected>Estacionamiento</option>
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select 
+                    formControlName="pets"
+                    name="pets"
+                    class="custom-select"
+                     id="parking_filter">
+                        <option value="null" selected>Mascotas</option>
+                        <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
                 </div>
@@ -115,24 +142,21 @@
 
                 <div class="col">
                     <select 
-                    formControlName="city"
-                    name="city"
-                    class="custom-select" id="trains_filter">
-                        <option value="null" selected>City</option>
+                    class="custom-select" id="city_filter"
+                    (change)="getSubCity($event)">
+                        <option value="null" selected>Ciudad</option>
                         <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
                     </select>
                 </div>
 
                 <div class="col">
-                        <input 
-                        formControlName="id"
-                        name="id"
-                        type="number" 
-                        class="form-control mt-0"  
-                        id="filter_bedrooms" 
-                        min="0"
-                        placeholder="ID"
-                        >
+                    <select 
+                    formControlName="subcity"
+                    name="subcity"
+                    class="custom-select" id="subcity_filter">
+                        <option value="null" selected>Subciudad</option>
+                        <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}</option>
+                    </select>
                 </div>
 
                 <div class="col">
@@ -158,7 +182,7 @@
         id="filterBtnMobile"
         (click)="refreshFilter()"
         >
-            Refresh Filter
+            Limpiar Filtros
         </button>
         <button 
         class="d-block w-100 d-lg-none btn btn-danger mt-2" 
@@ -166,7 +190,7 @@
         data-toggle="modal" 
         data-target="#modalFilterMobile"
         >
-            Filter
+            Filtrar
         </button>
     </div>
 </div>
@@ -176,11 +200,23 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
           <div class="modal-body">
-            <h5 class="text-center d-block m-auto">Option Filter</h5>
+            <h5 class="text-center d-block m-auto">Filtrar</h5>
             <form 
             [formGroup]="form" (submit)="sendFilter()"
             class="w-100 m-auto align-items-center justify-center">
                 <div class="form-row align-items-center w-100">
+
+                    <div class="col-12 mt-3">
+                            <input 
+                            formControlName="id"
+                            name="id"
+                            type="number" 
+                            class="form-control mt-0"  
+                            id="filter_bedrooms" 
+                            min="0"
+                            placeholder="ID"
+                            >
+                    </div>
 
                     <div class="col-12 mt-3">
                         <input 
@@ -189,7 +225,7 @@
                             type="text" 
                             class="form-control mt-0"  
                             id="filter_search" 
-                            placeholder="Search"
+                            placeholder="Buscar"
                         >
                     </div>
 
@@ -201,12 +237,12 @@
                         formControlName="floors"
                         name="floors"
                          >
-                            <option  value="null" selected>Floors</option>
+                            <option  value="null" selected>Piso</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
-                            <option value="penthouse">Penthouse</option>
-                            <option value="4">Others</option>
+                            <option value="ático">Ático</option>
+                            <option value="4">Otro</option>
                         </select>
                     </div>
     
@@ -216,8 +252,8 @@
                         name="credit"
                         class="custom-select"
                         id="credit_filter">
-                            <option  value="null" selected>Credit</option>
-                            <option value="true">Yes</option>
+                            <option  value="null" selected>Credito</option>
+                            <option value="true">Si</option>
                             <option value="false">No</option>
                         </select>
                     </div>
@@ -228,7 +264,7 @@
                         name="beds"
                         class="custom-select"
                         id="beds_filter">
-                            <option  value="null" selected>Beds</option>
+                            <option  value="null" selected>Habitaciones</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -244,11 +280,11 @@
                         formControlName="baths"
                         name="baths"
                         class="custom-select" id="baths_filter">
-                            <option value="null" selected>Baths</option>
+                            <option value="null" selected>Baños</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
-                            <option value="more_than_3">More than 3</option>
+                            <option value="more_than_3">Más de 3</option>
                         </select>
                     </div>
     
@@ -259,11 +295,11 @@
                         class="custom-select" 
                         id="price_filter">
                             <option  value="null" selected>Price</option>
-                            <option value="0_1000">less than $1000</option>
-                            <option value="1000_1700">$1000 and $1700</option>
-                            <option value="1701_2200">$1701 and $2200</option>
-                            <option value="2201_2900">$2201 and $2900 </option>
-                            <option value="2901">more than $2901</option>
+                            <option value="0_1000">Menos de $1000</option>
+                            <option value="1000_1900">$1000 and $1900</option>
+                            <option value="1901_2400">$1901 and $2400</option>
+                            <option value="2401_3100">$2401 and $3100 </option>
+                            <option value="2301">Más de $3101</option>
                         </select>
                     </div>
     
@@ -273,54 +309,66 @@
                         name="parking"
                         class="custom-select"
                          id="parking_filter">
-                            <option value="null" selected>Parking</option>
-                            <option value="true">Yes</option>
+                            <option value="null" selected>Estacionamiento</option>
+                            <option value="true">Si</option>
                             <option value="false">No</option>
                         </select>
                     </div>
 
                     <div class="col-12 mt-3">
                         <select 
-                        formControlName="city"
-                        name="city"
-                        class="custom-select" id="trains_filter">
-                            <option value="null" selected>City</option>
-                            <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
+                        formControlName="pets"
+                        name="pets"
+                        class="custom-select"
+                         id="pets_filter">
+                            <option value="null" selected>Mascotas</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
                         </select>
                     </div>
 
+                    <div class="col-12 mt-3">
+                        <select 
+                        class="custom-select" id="city_filter"
+                        (change)="getSubCity($event)">
+                            <option value="null" selected>Ciudad</option>
+                            <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-12 mt-3">
+                        <select 
+                        formControlName="subcity"
+                        name="subcity"
+                        class="custom-select" id="subcity_filter">
+                            <option value="null" selected>Subciudad</option>
+                            <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}</option>
+                        </select>
+                    </div>
+
+    
     
                     <div class="col-12 mt-3">
                         <select 
                         formControlName="trains"
                         name="trains"
                         class="custom-select" id="trains_filter">
-                            <option value="null" selected>Trains</option>
+                            <option value="null" selected>Tren</option>
                             <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
                         </select>
                     </div>
     
-                    <div class="col-12 mt-3">
-                            <input 
-                            formControlName="id"
-                            name="id"
-                            type="number" 
-                            class="form-control mt-0"  
-                            id="filter_bedrooms" 
-                            min="0"
-                            placeholder="Id"
-                            >
-                    </div>
+                    
     
                     <div class="col-12 mt-3">
                         <button class="btn btn-danger d-block m-auto">
-                            Filter Now                        
+                            Filtrar                        
                         </button>
                         <button 
                         id="closeModalFilter"
                         class="btn btn-danger d-none m-auto"
                         data-dismiss="modal">
-                           Close Modal                  
+                           Cerrar                 
                         </button>
                     </div>
                 </div>

@@ -77,12 +77,12 @@
         <h4>Posted: {{ apartament.created_at | date: 'yyyy-MM-dd h:mm a'}}</h4>
         <ul class="m-0 p-0 list">
           <li>
-            <span class="badge-light p-2">
+            <span class="badge-light p-2"  *ngIf="apartament.floors">
               <span class="material-icons">
                 business
               </span>
               <span class="ml-3" *ngIf="apartament.floors != 'Ático' && apartament.floors != 'others'">
-                {{apartament.floors }} Floor
+                {{apartament.floors }} Piso
               </span>              
               <span class="ml-3" *ngIf="apartament.floors == 'Ático'">
                 Ático
@@ -96,7 +96,7 @@
               <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/room-icon.png">
                 <span class="ml-3" *ngIf="apartament.bedrooms != 'full_house'">
-                  {{apartament.bedrooms }} Bedrooms
+                  {{apartament.bedrooms }} Habitaciones
                 </span>              
                 <span class="ml-3" *ngIf="apartament.bedrooms == 'full_house'">
                   Full House
@@ -106,38 +106,48 @@
           <li *ngIf="apartament.credit">
               <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/credit-icon.png">
-                <span class="ml-3">Credit</span>
+                <span class="ml-3">Credito</span>
               </span>
           </li>
           <li>
             <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/bathroom-icon.png">
                 <span class="ml-3" *ngIf="apartament.bathrooms != 'more_than_3'">
-                  {{apartament.bathrooms }} Bathrooms
+                  {{apartament.bathrooms }} Baño(s)
                 </span>
                 <span class="ml-3" *ngIf="apartament.bathrooms == 'more_than_3'">
-                  More than 3 Bathrooms
+                  More than 3 Baños
                 </span>    
             </span>
           </li>
           <li *ngIf="apartament.parking">
             <span class="badge-light p-2">
               <img class="icon-card" src="assets/icons/garage-icon.png">
-              <span class="ml-3">Parking</span>
+              <span class="ml-3">Estacionamiento</span>
             </span>
           </li>
-          <li>
+          <li *ngIf="apartament.subcity_value">
             <span class="badge-light p-2">
               <span class="material-icons">
                 location_city
               </span>
-              <span *ngIf="apartament.city_value" class="ml-3">
-                City: {{ apartament.city_value.name }}
+              <span *ngIf="apartament.subcity_value" class="ml-3">
+                Subciudad: {{ apartament.subcity_value.name }}
+              </span>
+            </span>
+          </li>
+          <li *ngIf="apartament.subcity_value">
+            <span class="badge-light p-2">
+              <span class="material-icons">
+                location_city
+              </span>
+              <span *ngIf="apartament.subcity_value.city_value" class="ml-3">
+                Ciudad: {{ apartament.subcity_value.city_value.name }}
               </span>
             </span>
           </li>
           <li>
-            <span class="badge-light p-2">
+            <span class="badge-light p-2" *ngIf="apartament.train_value">
               <span class="material-icons">
                 train
               </span>
@@ -149,7 +159,7 @@
               <span class="material-icons">
                 pets
               </span>
-              <span class="ml-3">Pets</span>
+              <span class="ml-3">Permite Mascotas</span>
             </span>
           </li>
       </ul>
@@ -159,7 +169,7 @@
             <span class="badge badge-pill badge-danger">${{ apartament.price }}</span>
           </h2>
           <h5 class="d-block text-right" *ngIf="session">
-            <span class="badge badge-pill badge-light">
+            <span class="badge badge-pill badge-light" *ngIf="apartament.phone">
               <span class="material-icons">
                 call
               </span>
@@ -171,7 +181,16 @@
 
     <div class="row mt-3">
       <div class="col-12">
-        <p>{{ apartament.description }}</p>
+        <p class="description_public">{{ apartament.description }}</p>
+      </div>
+    </div>
+
+    <div class="row mt-3" *ngIf="apartament.internal_description">
+      <div class="col-12"  *ngIf="session">
+        <p class="description_internal badge badge-light">
+          Internal Description (Only watch Agent):<br>
+          {{ apartament.internal_description }}
+        </p>
       </div>
     </div>
   </div>

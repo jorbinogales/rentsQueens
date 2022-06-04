@@ -1,24 +1,24 @@
 
 
-<h4 class="mt-5">Welcome!</h4>
+<h4 class="mt-5">Bievenido!</h4>
 
 <div style="position: relative;" class="mt-3">
-    <h4>My apartaments</h4>
+    <h4>Mis Apartamentos</h4>
     <button 
     [routerLink]="['/','dashboard','create-apartament']"
     id="createApartament" 
     class="btn btn-success btn-danger">
-        Create Apartament
+        Crear Apartamento
     </button>
 </div>
 <div *ngIf="apartaments.items.length == 0" class="card-body mt-5">
     <div class="alert alert-danger">
-        You not have apartament created 
+        No tienes Apartamentos creados
         <button class="btn btn-light m-auto d-none d-lg-block" [routerLink]="['/','dashboard','create-apartament']">
-            Create my first apartament
+            Crear mi primer apartamento
         </button>
         <button class="btn btn-light m-auto d-block d-lg-none " [routerLink]="['/','dashboard','create-apartament']">
-            Create 
+            Crear 
         </button>
     </div>
 </div>

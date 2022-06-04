@@ -12,3 +12,12 @@ select option{
   border-radius: 8px;
   text-align:center;
 }
+
+
+.custom-select option:hover {
+  background-color: green !important;
+}
+
+.vinotiton:hover{
+  background-color: #bd2424;
+}

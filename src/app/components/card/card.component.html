@@ -9,6 +9,7 @@
         [ngClass]="departament.status == 0 ? 'opacity-5' : ''" >
         <strong>{{ departament.title }}</strong>
         <p>{{ departament.address }}</p>
+        <p *ngIf="departament.subcity_value" class="badge badge-danger">{{ departament.subcity_value.city_value.name }} - {{ departament.subcity_value.name }}</p>
         <div class="row p-0 m-0">
             <div class="col-12 col-lg-7 p-0 m-0">
                 <img 
@@ -63,13 +64,20 @@
                         </span>
                         <span class="ml-3">Pets</span>
                     </li>
+                    <li *ngIf="departament.train_value">
+                        <span class="material-icons">
+                            train
+                        </span>
+                        <span class="ml-3">{{ departament.train_value.code }} | {{ departament.train_value.city }}</span>
+                    </li>
                 </ul>
             </div>
         </div>
+        <p *ngIf="departament.description">{{ departament.description }}</p>
     </div>
 </div>
 <div class="row" *ngIf="session">
-    <div class="col-5">
+    <div class="col-4">
         <button 
         (click)="changeStatus(departament.id)"
         class="btn btn-danger mt-2 d-block w-100" 
@@ -91,7 +99,7 @@
             Show
         </button>
     </div>
-    <div class="col-5">
+    <div class="col-4">
         <button 
         [ngClass]="deleteBtn === true ? 'disabled' : ''"
         (click)="deleteDepartament(departament.id)"
@@ -100,6 +108,16 @@
                 delete
             </span>
             Delete
+        </button>
+    </div>
+    <div class="col-4">
+        <button 
+        class="btn btn-danger mt-2 d-block w-100"
+        [routerLink]="['','dashboard', 'edit-apartament', departament.id]">
+            <span class="material-icons">
+                edit
+            </span>
+            Edit
         </button>
     </div>
 </div>

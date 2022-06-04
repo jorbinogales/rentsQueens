@@ -7,19 +7,15 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { CardModule } from 'src/app/components/card/card.module';
 import { DepartamentModule } from 'src/app/components/departament/departament.module';
 import { FilterModule } from 'src/app/components/filter/filter.module';
-import { CreateApartamentService } from './create-apartament/create-apartament.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptorModule } from 'src/app/interceptor/jwt-interceptor.module';
 import { LoadingModule } from 'src/app/components/loading/loading.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    DashboardInitComponent,
-    CreateApartamentComponent,
-  ],
+  declarations: [DashboardInitComponent, CreateApartamentComponent],
   imports: [
     NgxPaginationModule,
     FormsModule,
@@ -33,9 +29,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DashboardPagesRouting,
     JwtInterceptorModule,
     ImageCropperModule,
-  ],
-  providers:[
-    CreateApartamentService,
   ]
 })
-export class DashboardPagesModule { }
+export class DashboardPagesModule {}

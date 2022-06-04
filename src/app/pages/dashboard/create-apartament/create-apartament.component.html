@@ -3,17 +3,18 @@
 
     <div class="card mt-5">
         <div class="card-header">
-            <h2 class="card-title">Create apartament</h2>
+            <h2 class="card-title">Crear Apartamento</h2>
         </div>
         <div class="card-body">   
             <div 
             *ngIf="error"
             class="alert alert-danger">
-                Fix the following errors
+                Corrige los siguientes errores
             </div>  
             <app-loading *ngIf="loading"></app-loading>
             <form *ngIf="loading == false"
-            [formGroup]="form" (submit)="createApartament()">
+            [formGroup]="form" 
+            (submit)="createApartament(apartament_id)">
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <div class="form-group">
@@ -21,7 +22,7 @@
                             type="text" 
                             class="form-control" 
                             id="title"
-                            placeholder="Title"
+                            placeholder="Titulo"
                             formControlName="title"
                             name="title"
                             required
@@ -30,7 +31,7 @@
                         <div 
                             class="text-danger mt-2"
                             *ngIf="error && error.indexOf('title should not be empty') > -1">
-                                This value is required
+                                Este valor es requerido
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
@@ -46,7 +47,7 @@
                         <div 
                             class="text-danger mt-2"
                             *ngIf="error && error.indexOf('price should not be empty') > -1">
-                                This value is required
+                                Este valor es Requerido
                         </div>
                     </div>
                 </div>
@@ -61,6 +62,11 @@
                             formControlName="address"
                             name="address">
                         </div>
+                        <div 
+                            class="text-danger mt-2"
+                            *ngIf="error && error.indexOf('address must be a string') > -1">
+                                This value is required
+                        </div>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="form-group">
@@ -68,15 +74,16 @@
                             type="text" 
                             class="form-control" 
                             id="phone"
-                            placeholder="Phone"
+                            placeholder="Teléfono "
                             formControlName="phone"
                             name="phone">
                         </div>
+                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-4">
-                        <label>Floors</label>
+                        <label>Piso</label>
                         <select 
                         class="custom-select" 
                         id="floors_filter"
@@ -87,16 +94,16 @@
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="Ático">Ático</option>
-                            <option value="others">Others</option>
+                            <option value="others">Otro</option>
                         </select>
                         <div 
                             class="text-danger mt-2"
-                            *ngIf="error &&  error.indexOf('floors must be a number conforming to the specified constraints') > -1">
-                                This value is required
+                            *ngIf="error && error.indexOf('floors must be a string') > -1">
+                                Este valor es requerido
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <label>Bedrooms</label>
+                        <label>Habitaciones</label>
                         <select 
                         class="custom-select" 
                         id="beds_filter"
@@ -113,12 +120,12 @@
                         </select>
                         <div 
                             class="text-danger mt-2"
-                            *ngIf="error &&  error.indexOf('bedrooms must be a number conforming to the specified constraints') > -1">
-                                This value is required
+                            *ngIf="error && error.indexOf('bedrooms must be a string') > -1">
+                                Ete valor es requerido
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <label>Bathrooms</label>
+                        <label>Baños</label>
                         <select 
                         class="custom-select"
                             id="bathrooms"
@@ -127,16 +134,16 @@
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
-                            <option value="more_than_3">More than 3</option>
+                            <option value="more_than_3">Más de 3</option>
                         </select>
                         <div 
                             class="text-danger mt-2"
-                            *ngIf="error &&  error.indexOf('bathrooms must be a number conforming to the specified constraints') > -1">
-                                This value is required
+                            *ngIf="error && error.indexOf('bathrooms must be a string') > -1">
+                                Este valor es requerido
                         </div>
                     </div>
                     <div class="col-12 col-lg-4 mt-lg-4">
-                        <label>Trains</label>
+                        <label>Trenes</label>
                         <select 
                         class="custom-select" 
                         id="train"
@@ -147,20 +154,33 @@
                         </select>
                     </div>
                     <div class="col-12 col-lg-4 mt-lg-4">
-                        <label>City</label>
+                        <label>Ciudad</label>
                         <select 
                         class="custom-select" 
                         id="city"
                         formControlName="city"
                         name="city" 
+                        (change)="getSubCities($event)"
                         >
+                            <option selected></option>
                             <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-4 mt-lg-4">
+                        <label>Subciudad</label>
+                        <select 
+                        class="custom-select" 
+                        id="city"
+                        formControlName="subcity"
+                        name="subcity" 
+                        >
+                            <option *ngFor="let subcity of subcities" value="{{ subcity.id }}">{{ subcity.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-12 col-lg-4">
-                        <p>Credit</p>
+                        <p>Crédito</p>
                         <div class="custom-control custom-switch">
                             <input 
                             class="custom-control-input" 
@@ -173,7 +193,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <p>Parking</p>
+                        <p>Estacionamiento</p>
                         <div class="custom-control custom-switch">
                             <input 
                             class="custom-control-input" 
@@ -186,7 +206,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <p>Pets</p>
+                        <p>Mascotas</p>
                         <div class="custom-control custom-switch">
                             <input 
                             class="custom-control-input" 
@@ -208,7 +228,21 @@
                             class="form-control mt-3" 
                             id="description" 
                             rows="3"
-                            placeholder="Description"
+                            placeholder="Descripción"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <textarea 
+                            formControlName="internal_description"
+                            name="internal_description"
+                            class="form-control mt-3" 
+                            id="description" 
+                            rows="3"
+                            placeholder="Descripción interna (Visible solo para agentes)"
                             ></textarea>
                         </div>
                     </div>
@@ -219,11 +253,19 @@
                         <!-- Show uploaded  images by user 
                         latere here cropped images will be 
                         replaced with origional -->
-                        <div style="display:flex ;max-width:600px; overflow: auto;">
-                            <div *ngFor="let item of ulpoadedFiles" style="margin:5px">
+                        <div style="display:flex; flex-wrap: wrap; width: 100%; margin:auto; padding:0; max-width:1000px">
+                            <div *ngFor="let item of ulpoadedFiles" style="margin:5px; position:relative">
                                 <span (click)="cropImage(item.imgId)">
                                     <img [src]="item.imgBase64" style="max-width:300px;max-height:100px ;border:2px solid gray" />
                                 </span>
+                                <button 
+                                (click)="deleteImage(item.imgId)"
+                                type="button" 
+                                class="btn btn-danger float-right mt-2 ml-2">
+                                    <span class="material-icons">
+                                        delete
+                                    </span>
+                                </button>
                             </div>
                         </div>
                         <!--  -->
@@ -238,7 +280,7 @@
                             multiple 
                             
                             (change)="fileChangeEvent($event)"
-                            accept="image/png, image/jpeg" 
+                            accept="image/*" 
                             #image />
                             <label class="custom-file-label" for="validatedCustomFile">
                                 Upload Fiel About Apartament

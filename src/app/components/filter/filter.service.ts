@@ -11,6 +11,7 @@ import { TrainInterface } from '../../interface/train.interface';
 export class FilterService {
 
     public _city: BehaviorSubject<CityInterface | null> = new BehaviorSubject(null);
+    public _subcity: BehaviorSubject<any | null> = new BehaviorSubject(null);
     public _train: BehaviorSubject<TrainInterface | null> = new BehaviorSubject(null);
 
     constructor(private _http : HttpClient){}
@@ -25,6 +26,11 @@ export class FilterService {
         return this._city.asObservable();
     }
 
+    get subcity$(): Observable<any>
+    {
+        return this._subcity.asObservable();
+    }
+
 
     getTrains(): Promise<any>
     {
@@ -34,5 +40,10 @@ export class FilterService {
     getCity(): Promise<any>
     {
         return this._http.get<any>(`${environment.MS_USER_API}/city/index`).toPromise();
+    }
+
+    getSubCity(city_id: string): Promise<any>
+    {
+        return this._http.get<any>(`${environment.MS_USER_API}/subcity/${city_id}`).toPromise();
     }
 }
