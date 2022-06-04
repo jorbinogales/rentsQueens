@@ -256,7 +256,6 @@ export class CreateApartamentComponent implements OnInit {
       (resp: any) => {
         this.uploadImage(resp.id);
         this.error = null;
-        this.loading = false;
       },
       (err) => {
         this.error = err.error.message;
