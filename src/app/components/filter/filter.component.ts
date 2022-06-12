@@ -16,7 +16,7 @@ export class FilterComponent implements OnInit {
   subcities: any;
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _filterService: FilterService
+    private readonly _filterService: FilterService,
   ) {}
 
   ngOnInit(): void {

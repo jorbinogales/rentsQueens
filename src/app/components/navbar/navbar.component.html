@@ -11,6 +11,26 @@
 
     <button 
     class="btn btn-danger" 
+    [routerLink]="['', 'dashboard']"
+    *ngIf="session == true &&  _router.url.split('/')[1] == 'home'"
+    >
+    
+      Dashboard
+    </button>
+
+
+    <button 
+    class="btn btn-danger" 
+    [routerLink]="['', 'home']"
+    *ngIf="session == true &&  _router.url.split('/')[1] == 'dashboard'"
+    >
+      Home
+    </button>
+
+
+
+    <button 
+    class="btn btn-danger" 
     id="loginBtn"
     *ngIf="session == true"
     (click)="logout()"

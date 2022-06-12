@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ResponseInterface } from 'src/app/interface/response.interface';
 import { NavbarService } from './navbar.service';
@@ -20,12 +20,15 @@ export class NavbarComponent implements OnInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _navbarService: NavbarService,
     private readonly _cookieService: CookieService,
-    private readonly _router: Router
+    public readonly _router: Router,
+    private readonly _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.buildForm();
-    this.onSession();
+    this._activatedRoute.params.subscribe(() => {
+      this.onSession();
+    });
   }
 
   private buildForm() {
@@ -37,6 +40,7 @@ export class NavbarComponent implements OnInit {
 
   private onSession() {
     const token = this._cookieService.get('token');
+    console.log(token);
     token ? (this.session = true) : (this.session = false);
   }
 
@@ -68,7 +72,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this._cookieService.delete('token');
-    this._router.navigate(['/', 'home']);
     this.onSession();
+    this._router.navigate(['/', 'home']);
   }
 }

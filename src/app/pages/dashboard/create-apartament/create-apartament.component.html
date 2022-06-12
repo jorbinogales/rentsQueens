@@ -90,6 +90,7 @@
                         id="floors"
                         formControlName="floors"
                         >
+                            <option value="Sótano">Sótano</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -110,6 +111,7 @@
                         formControlName="bedrooms"
                         name="bedrooms"
                         >
+                            <option value="Monoambiente">Monoambiente</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -144,17 +146,19 @@
                     </div>
                     <div class="col-12 col-lg-4 mt-lg-4">
                         <label>Trenes</label>
-                        <select 
-                        class="custom-select" 
-                        id="train"
-                        formControlName="train"
-                        name="train" 
+                        <ng-multiselect-dropdown
+                        [placeholder]="' '"
+                        [settings]="dropdownSettings"
+                        [data]="trainsDropDown"
+                        formControlName="trains"
+                        [(ngModel)]="selectedTrains"
+                        (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
                         >
-                            <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
-                        </select>
+                        </ng-multiselect-dropdown>
                     </div>
                     <div class="col-12 col-lg-4 mt-lg-4">
-                        <label>Ciudad</label>
+                        <label>Condados</label>
                         <select 
                         class="custom-select" 
                         id="city"
@@ -167,7 +171,7 @@
                         </select>
                     </div>
                     <div class="col-12 col-lg-4 mt-lg-4">
-                        <label>Subciudad</label>
+                        <label>Ciudades</label>
                         <select 
                         class="custom-select" 
                         id="city"
@@ -290,6 +294,9 @@
                         <!--  -->
                     </div>
                 </div>
+
+               
+                
                 <input type="submit" class="btn btn-success float-right mt-5" value="Save">
             </form>
         </div>

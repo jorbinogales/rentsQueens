@@ -13,10 +13,12 @@ import { LoadingModule } from 'src/app/components/loading/loading.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [DashboardInitComponent, CreateApartamentComponent],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,

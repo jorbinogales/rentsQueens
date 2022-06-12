@@ -35,6 +35,13 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'page/:page',
+    component: DashboardInitComponent,
+    resolve: {
+      apartaments: DashboardInitResolver,
+    },
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

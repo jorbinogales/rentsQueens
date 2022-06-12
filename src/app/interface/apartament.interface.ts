@@ -16,6 +16,6 @@ export interface ApartamentInterface {
   status: boolean;
   created_at: string;
   updated_at: string;
-  train_value: any;
+  trains_value: any;
   city_value: any;
 }

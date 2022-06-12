@@ -3,7 +3,7 @@
     <button 
     data-toggle="tooltip" data-placement="top" title="Tooltip on top"
     class="btn btn-danger mb-3" 
-    [routerLink]="['', 'home']"> 
+    (click)="backClicked()"> 
       <span class="material-icons">
         arrow_back_ios
       </span>
@@ -12,6 +12,8 @@
     <h2 class="d-block w-100 position-relative">
       {{ apartament.title }} 
     </h2>
+
+
     <h4>
       <span 
       *ngIf="apartament.city_value"
@@ -28,6 +30,7 @@
       </span>
     </h4>
 
+    
     
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" *ngIf="apartament.image_values.length > 0">
@@ -72,6 +75,29 @@
       </a>
     </div>
 
+    <div *ngIf="apartament.trains_value.length > 0">
+      <strong class="mb-0">Trenes:</strong>
+      <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="apartament.trains_value" style="list-style:none">
+        <li class="p-1 m-0" *ngFor="let train of apartament.trains_value">
+            <span class="badge badge-pill badge-danger" >
+                {{ train.train_value.code }}
+            </span>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="apartament.trains_value.length == 0">
+      <strong class="mb-0">Trenes:</strong>
+      <span class="p-2 d-block">
+        <span class="material-icons icon-gray">
+          railway_alert
+        </span>
+        <span  class="ml-3 badge-light">
+         No hay paradas de trenes cerca
+        </span>
+      </span>
+    </div>
+
     <div class="row mt-3">
       <div class="col-8">
         <h4>Posted: {{ apartament.created_at | date: 'yyyy-MM-dd h:mm a'}}</h4>
@@ -81,7 +107,7 @@
               <span class="material-icons">
                 business
               </span>
-              <span class="ml-3" *ngIf="apartament.floors != 'Ático' && apartament.floors != 'others'">
+              <span class="ml-3" *ngIf="apartament.floors != 'Ático' && apartament.floors != 'others' && apartament.floors != 'Sótano'">
                 {{apartament.floors }} Piso
               </span>              
               <span class="ml-3" *ngIf="apartament.floors == 'Ático'">
@@ -90,24 +116,38 @@
               <span class="ml-3" *ngIf="apartament.floors == 'others'">
                 Other
               </span> 
+              <span class="ml-3" *ngIf="apartament.floors == 'Sótano'">
+                Sótano
+              </span> 
             </span>
           </li>
           <li>
               <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/room-icon.png">
-                <span class="ml-3" *ngIf="apartament.bedrooms != 'full_house'">
+                <span class="ml-3" *ngIf="apartament.bedrooms != 'full_house' && apartament.bedrooms != 'Monoambiente'">
                   {{apartament.bedrooms }} Habitaciones
                 </span>              
                 <span class="ml-3" *ngIf="apartament.bedrooms == 'full_house'">
                   Full House
+                </span>
+                <span class="ml-3" *ngIf="apartament.bedrooms == 'Monoambiente'">
+                  Monoambiente
                 </span>  
               </span>
           </li>
-          <li *ngIf="apartament.credit">
+          <li *ngIf="apartament.credit == true">
               <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/credit-icon.png">
                 <span class="ml-3">Credito</span>
               </span>
+          </li>
+          <li *ngIf="apartament.credit == false">
+            <span class="badge-light p-2">
+              <span class="material-symbols-outlined icon-gray">
+                credit_card_off
+              </span>
+              <span class="ml-3">No Permite credito</span>
+            </span>
           </li>
           <li>
             <span class="badge-light p-2">
@@ -126,6 +166,14 @@
               <span class="ml-3">Estacionamiento</span>
             </span>
           </li>
+          <li *ngIf="apartament.parking == false">
+            <span class="badge-light p-2">
+              <span class="material-symbols-outlined icon-gray">
+                no_transfer
+              </span>
+              <span class="ml-3">Sin Estacionamiento</span>
+            </span>
+          </li>
           <li *ngIf="apartament.subcity_value">
             <span class="badge-light p-2">
               <span class="material-icons">
@@ -138,20 +186,12 @@
           </li>
           <li *ngIf="apartament.subcity_value">
             <span class="badge-light p-2">
-              <span class="material-icons">
+              <span class="material-icons icon-gray">
                 location_city
               </span>
               <span *ngIf="apartament.subcity_value.city_value" class="ml-3">
                 Ciudad: {{ apartament.subcity_value.city_value.name }}
               </span>
-            </span>
-          </li>
-          <li>
-            <span class="badge-light p-2" *ngIf="apartament.train_value">
-              <span class="material-icons">
-                train
-              </span>
-              <span class="ml-3">{{ apartament.train_value.code }} | {{ apartament.train_value.city }}</span>
             </span>
           </li>
           <li *ngIf="apartament.pets">
@@ -160,6 +200,14 @@
                 pets
               </span>
               <span class="ml-3">Permite Mascotas</span>
+            </span>
+          </li>
+          <li *ngIf="apartament.pets == false">
+            <span class="badge-light p-2">
+              <span class="material-icons">
+                warning
+              </span>
+              <span class="ml-3">No Permite Mascotas</span>
             </span>
           </li>
       </ul>
@@ -187,8 +235,8 @@
 
     <div class="row mt-3" *ngIf="apartament.internal_description">
       <div class="col-12"  *ngIf="session">
-        <p class="description_internal badge badge-light">
-          Internal Description (Only watch Agent):<br>
+        <p class="description_internal bg-light p-2" 
+        >
           {{ apartament.internal_description }}
         </p>
       </div>
@@ -200,7 +248,7 @@
       >
       <h3>Others Apartaments</h3>
       <div class="row">
-        <div class="col-12 mt-3" *ngFor="let apartament of apartaments.items" >
+        <div class="col-12 mt-3" *ngFor="let apartament of apartaments.data" >
           <app-card [departament]="apartament"></app-card>
         </div>
       </div>

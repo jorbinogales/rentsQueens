@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -18,12 +19,14 @@ export class CardComponent implements OnInit {
   url: string;
   session: boolean = false;
 
-  constructor(private readonly _cookieService: CookieService) {}
+  constructor(
+    private readonly _cookieService: CookieService,
+    public readonly _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.url = environment.MS_USER_API;
     this.onSession();
-    console.log(this.departament);
   }
 
   private onSession() {

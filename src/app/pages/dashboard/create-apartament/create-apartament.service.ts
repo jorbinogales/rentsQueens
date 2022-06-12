@@ -71,7 +71,7 @@ export class CreateApartamentService {
       bathrooms: form.bathrooms,
       credit: form.credit,
       pets: form.pets,
-      train: parseInt(form.train),
+      trains: form.trains,
       subcity: parseInt(form.subcity),
       parking: form.parking,
       phone: form.phone,
@@ -105,6 +105,20 @@ export class CreateApartamentService {
     });
     return this._http
       .post<any>(`${environment.MS_USER_API}/departament_image`, formData)
+      .pipe(
+        tap((response) => {
+          return response;
+        })
+      );
+  }
+
+  createTrainsDepartament(apartament_id: string, form: any): Observable<any> {
+    let data = {
+      departament_id: apartament_id,
+      trains: form.trains,
+    };
+    return this._http
+      .post<any>(`${environment.MS_USER_API}/departament_train`, data)
       .pipe(
         tap((response) => {
           return response;

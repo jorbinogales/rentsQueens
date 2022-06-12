@@ -10,6 +10,14 @@
         <strong>{{ departament.title }}</strong>
         <p>{{ departament.address }}</p>
         <p *ngIf="departament.subcity_value" class="badge badge-danger">{{ departament.subcity_value.city_value.name }} - {{ departament.subcity_value.name }}</p>
+        <p class="mb-0">Trenes:</p>
+        <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="departament.trains_value">
+            <li class="p-1 m-0" *ngFor="let train of departament.trains_value">
+                <span class="badge badge-pill badge-danger" >
+                    {{ train.train_value.code }}
+                </span>
+            </li>
+        </ul>
         <div class="row p-0 m-0">
             <div class="col-12 col-lg-7 p-0 m-0">
                 <img 
@@ -30,18 +38,28 @@
                 <ul class="m-0 p-0">
                     <li>
                         <img class="icon-card" src="assets/icons/room-icon.png">
-                        <span class="ml-3" *ngIf="departament.bedrooms != 'full_house'">
+                        <span class="ml-3" 
+                        *ngIf="departament.bedrooms != 'full_house' && departament.bedrooms != 'Monoambiente'">
                             {{departament.bedrooms }} Bedrooms
                         </span>              
                         <span class="ml-3" *ngIf="departament.bedrooms == 'full_house'">
                             Full House
                         </span>  
+                        <span class="ml-3" *ngIf="departament.bedrooms == 'Monoambiente'">
+                            Monoambiente
+                        </span>
                     </li>
-                    <li *ngIf="departament.credit">
+                    <li *ngIf="departament.credit == true">
                         <img class="icon-card" src="assets/icons/credit-icon.png">
                         <span class="ml-3">
                             Credit
                         </span>
+                    </li>
+                    <li *ngIf="departament.credit == false">
+                          <span class="material-icons material-symbols-outlined icon-gray">
+                            credit_card_off
+                          </span>
+                          <span class="ml-3">No credito</span>
                     </li>
                     <li>
                         <img class="icon-card" src="assets/icons/bathroom-icon.png">
@@ -58,25 +76,34 @@
                             Parking
                         </span>
                     </li>
+                    <li *ngIf="departament.parking == false">
+                        <span class="material-symbols-outlined material-icons icon-gray">
+                            no_transfer
+                        </span>
+                        <span class="ml-3">
+                            Not Parking
+                        </span>
+                    </li>
                     <li *ngIf="departament.pets">
                         <span class="material-icons">
                             pets
                         </span>
                         <span class="ml-3">Pets</span>
                     </li>
-                    <li *ngIf="departament.train_value">
-                        <span class="material-icons">
-                            train
+                    <li *ngIf="departament.pets == false">
+                        <span class="material-icons-outlined material-icons icon-gray">
+                            warning
                         </span>
-                        <span class="ml-3">{{ departament.train_value.code }} | {{ departament.train_value.city }}</span>
+                        <span class="ml-3">Not Pets</span>
                     </li>
+                
                 </ul>
             </div>
         </div>
         <p *ngIf="departament.description">{{ departament.description }}</p>
     </div>
 </div>
-<div class="row" *ngIf="session">
+<div class="row" *ngIf="session == true && _router.url == '/dashboard'">
     <div class="col-4">
         <button 
         (click)="changeStatus(departament.id)"

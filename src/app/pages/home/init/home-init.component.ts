@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { HomeInitService } from './home-init.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeInitComponent implements OnInit {
   apartaments: any;
   p: number = 1;
   error: boolean = false;
+  currentPageRouter: any;
 
   paginationControl = {
     maxSize: 9,
@@ -25,7 +27,9 @@ export class HomeInitComponent implements OnInit {
   constructor(
     private readonly _homeInitService: HomeInitService,
     private readonly _cookieService: CookieService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _location: Location,
+    private readonly _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +45,11 @@ export class HomeInitComponent implements OnInit {
         this.error = true;
       }
     );
+
+    this._activatedRoute.params.subscribe((params) => {
+      this.currentPageRouter = params['page'] ? params['page'] : '1';
+      this.getDataFromFilter(null, parseInt(this.currentPageRouter));
+    });
   }
 
   async getDataFromFilter(e, page?: number) {
@@ -60,7 +69,6 @@ export class HomeInitComponent implements OnInit {
   }
 
   async pageChanged(event): Promise<any> {
-    console.log(event);
-    await this.getDataFromFilter(null, event);
+    this._router.navigate(['/', 'home', 'page', event]);
   }
 }

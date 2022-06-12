@@ -4,9 +4,9 @@
      
         <form 
         [formGroup]="form" (submit)="sendFilter()"
-        class="w-100 m-auto align-items-center justify-center d-none d-sm-none d-md-none d-lg-block">
+        class="w-100 m-auto align-items-center justify-center d-block">
             <div class="form-row w-100 mt-3">
-                <div class="col-2 m-auto">
+                <div class="col-4 col-lg-2 m-auto">
                     <img src="assets/icons/logo.png" class="w-100 mb-3" style="max-wdith: 200px">
                     <input 
                         formControlName="search"
@@ -21,7 +21,7 @@
             <div class="form-row align-items-center w-100 mt-3">
                 
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0 col-lg">
                     <input 
                     formControlName="id"
                     name="id"
@@ -33,7 +33,7 @@
                     >
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     class="custom-select"
                     id="floors_filter"
@@ -41,15 +41,16 @@
                     name="floors"
                      >
                         <option  value="null" selected>Piso</option>
+                        <option value="Sótano">Sótano</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="ático">Ático</option>
+                        <option value="Ático">Ático</option>
                         <option value="4">Otro</option>
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="credit"
                     name="credit"
@@ -61,13 +62,14 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="beds"
                     name="beds"
                     class="custom-select"
                     id="beds_filter">
-                        <option  value="null" selected>Cuartos</option>
+                        <option  value="null" selected>Habitaciones</option>
+                        <option value="Monoambiente">Monoambiente</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -78,7 +80,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="baths"
                     name="baths"
@@ -91,7 +93,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="price"
                     name="price"
@@ -106,7 +108,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="parking"
                     name="parking"
@@ -118,7 +120,7 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="pets"
                     name="pets"
@@ -130,44 +132,44 @@
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4 mb-3 mb-lg-0  col-lg">
                     <select 
                     formControlName="trains"
                     name="trains"
                     class="custom-select" id="trains_filter">
-                        <option value="null" selected>Trains</option>
+                        <option value="null" selected>Trenes</option>
                         <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4  mb-3 mb-lg-0 col-lg">
                     <select 
                     class="custom-select" id="city_filter"
                     (change)="getSubCity($event)">
-                        <option value="null" selected>Ciudad</option>
+                        <option value="null" selected>Condados</option>
                         <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
                     </select>
                 </div>
 
-                <div class="col">
+                <div class="col-4  mb-3 mb-lg-0 col-lg">
                     <select 
                     formControlName="subcity"
                     name="subcity"
                     class="custom-select" id="subcity_filter">
-                        <option value="null" selected>Subciudad</option>
+                        <option value="null" selected>Ciudades</option>
                         <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}</option>
                     </select>
                 </div>
 
-                <div class="col">
-                    <button type="submit" class="btn btn-danger">
+                <div class="col-6  mb-3 mb-lg-0 col-lg">
+                    <button type="submit" class="btn btn-danger d-block w-100">
                         <span  class="material-icons">
                             search
                         </span>                            
                     </button>
                 </div>
-                <div class="col">
-                    <button class="btn btn-danger" (click)="refreshFilter()">
+                <div class="col-6  mb-3 mb-lg-0 col-lg">
+                    <button class="btn btn-danger d-block w-100" (click)="refreshFilter()">
                         <span 
                         class="material-icons">
                             clear
@@ -176,205 +178,5 @@
                 </div>
             </div>
         </form>
-
-        <button 
-        class="d-block w-100 d-lg-none btn btn-danger mt-5" 
-        id="filterBtnMobile"
-        (click)="refreshFilter()"
-        >
-            Limpiar Filtros
-        </button>
-        <button 
-        class="d-block w-100 d-lg-none btn btn-danger mt-2" 
-        id="filterBtnMobile"
-        data-toggle="modal" 
-        data-target="#modalFilterMobile"
-        >
-            Filtrar
-        </button>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalFilterMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <div class="modal-body">
-            <h5 class="text-center d-block m-auto">Filtrar</h5>
-            <form 
-            [formGroup]="form" (submit)="sendFilter()"
-            class="w-100 m-auto align-items-center justify-center">
-                <div class="form-row align-items-center w-100">
-
-                    <div class="col-12 mt-3">
-                            <input 
-                            formControlName="id"
-                            name="id"
-                            type="number" 
-                            class="form-control mt-0"  
-                            id="filter_bedrooms" 
-                            min="0"
-                            placeholder="ID"
-                            >
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <input 
-                            formControlName="search"
-                            name="search"
-                            type="text" 
-                            class="form-control mt-0"  
-                            id="filter_search" 
-                            placeholder="Buscar"
-                        >
-                    </div>
-
-                    
-                    <div class="col-12 mt-3">
-                        <select 
-                        class="custom-select"
-                        id="floors_filter"
-                        formControlName="floors"
-                        name="floors"
-                         >
-                            <option  value="null" selected>Piso</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="ático">Ático</option>
-                            <option value="4">Otro</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="credit"
-                        name="credit"
-                        class="custom-select"
-                        id="credit_filter">
-                            <option  value="null" selected>Credito</option>
-                            <option value="true">Si</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="beds"
-                        name="beds"
-                        class="custom-select"
-                        id="beds_filter">
-                            <option  value="null" selected>Habitaciones</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="full_house">Full house</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="baths"
-                        name="baths"
-                        class="custom-select" id="baths_filter">
-                            <option value="null" selected>Baños</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="more_than_3">Más de 3</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="price"
-                        name="price"
-                        class="custom-select" 
-                        id="price_filter">
-                            <option  value="null" selected>Price</option>
-                            <option value="0_1000">Menos de $1000</option>
-                            <option value="1000_1900">$1000 and $1900</option>
-                            <option value="1901_2400">$1901 and $2400</option>
-                            <option value="2401_3100">$2401 and $3100 </option>
-                            <option value="2301">Más de $3101</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="parking"
-                        name="parking"
-                        class="custom-select"
-                         id="parking_filter">
-                            <option value="null" selected>Estacionamiento</option>
-                            <option value="true">Si</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="pets"
-                        name="pets"
-                        class="custom-select"
-                         id="pets_filter">
-                            <option value="null" selected>Mascotas</option>
-                            <option value="true">Si</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <select 
-                        class="custom-select" id="city_filter"
-                        (change)="getSubCity($event)">
-                            <option value="null" selected>Ciudad</option>
-                            <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
-                        </select>
-                    </div>
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="subcity"
-                        name="subcity"
-                        class="custom-select" id="subcity_filter">
-                            <option value="null" selected>Subciudad</option>
-                            <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}</option>
-                        </select>
-                    </div>
-
-    
-    
-                    <div class="col-12 mt-3">
-                        <select 
-                        formControlName="trains"
-                        name="trains"
-                        class="custom-select" id="trains_filter">
-                            <option value="null" selected>Tren</option>
-                            <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
-                        </select>
-                    </div>
-    
-                    
-    
-                    <div class="col-12 mt-3">
-                        <button class="btn btn-danger d-block m-auto">
-                            Filtrar                        
-                        </button>
-                        <button 
-                        id="closeModalFilter"
-                        class="btn btn-danger d-none m-auto"
-                        data-dismiss="modal">
-                           Cerrar                 
-                        </button>
-                    </div>
-                </div>
-            </form>
-          </div>
-      </div>
-    </div>
-</div>
-

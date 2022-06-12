@@ -5,6 +5,7 @@ import { CreateApartamentService } from './create-apartament.service';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import { Subject, takeUntil } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-create-apartament',
@@ -31,6 +32,12 @@ export class CreateApartamentComponent implements OnInit {
   subcity: any;
   apartament_id: any = null;
 
+  //* MULTISELECT *//
+
+  trainsDropDown = [];
+  selectedTrains = [];
+  dropdownSettings = {};
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _createApartamentService: CreateApartamentService,
@@ -42,6 +49,22 @@ export class CreateApartamentComponent implements OnInit {
     let departamentId = this._activatedRoute.snapshot.paramMap.get('id');
     this._createApartamentService.getTrains().then((resp) => {
       this.trains = resp;
+      this.trainsDropDown = [];
+      this.trains.forEach((train) => {
+        this.trainsDropDown.push({
+          id: train.id,
+          text: train.code + ' | ' + train.city,
+        });
+      });
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'id',
+        textField: 'text',
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        searchPlaceholderText: 'Buscar Tren',
+        placeholder: '',
+      };
     });
     this._createApartamentService.getCity().then((resp) => {
       this.cities = resp;
@@ -128,6 +151,13 @@ export class CreateApartamentComponent implements OnInit {
     });
   }
 
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
@@ -171,7 +201,7 @@ export class CreateApartamentComponent implements OnInit {
       floors: [],
       bedrooms: [],
       bathrooms: [],
-      train: [],
+      trains: [],
       city: [],
       subcity: [],
       credit: [],
@@ -203,9 +233,18 @@ export class CreateApartamentComponent implements OnInit {
       this.form.controls['bathrooms'].setValue(
         apartament.bathrooms ? apartament.bathrooms : ''
       );
-      this.form.controls['train'].setValue(
-        apartament.train_value ? apartament.train_value.id : ''
-      );
+
+      if (apartament.trains_value) {
+        apartament.trains_value.forEach((train) => {
+          if (train.train_value) {
+            this.selectedTrains.push({
+              id: train.train_value.id,
+              text: train.train_value.code + ' | ' + train.train_value.city,
+            });
+          }
+        });
+      }
+
       if (apartament.subcity_value) {
         await this.getSubCity(apartament.subcity_value.id);
         this.form.controls['city'].setValue(
@@ -254,6 +293,7 @@ export class CreateApartamentComponent implements OnInit {
     const form = this.form.getRawValue();
     this._createApartamentService.createApartament(form, id).subscribe(
       (resp: any) => {
+        this.createTrainsDepartament(resp.id, form);
         this.uploadImage(resp.id);
         this.error = null;
       },
@@ -275,6 +315,21 @@ export class CreateApartamentComponent implements OnInit {
         (resp: any) => {
           this.error = null;
           this._router.navigate(['/', 'dashboard']);
+          this.loading = false;
+        },
+        (err) => {
+          this.error = err.error.message;
+          this.loading = false;
+        }
+      );
+  }
+
+  createTrainsDepartament(id_apartament: string, form) {
+    this._createApartamentService
+      .createTrainsDepartament(id_apartament, form)
+      .subscribe(
+        (resp: any) => {
+          this.error = null;
           this.loading = false;
         },
         (err) => {

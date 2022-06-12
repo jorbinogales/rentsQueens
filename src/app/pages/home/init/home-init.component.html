@@ -1,15 +1,16 @@
 <app-filter (filterData)="getDataFromFilter($event)"></app-filter>
 
 <div 
-    *ngIf="apartaments.meta.totalPages > 1"
+    *ngIf="apartaments.meta.pageCount > 1"
     class="d-block" 
     style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
     class="my-pagination"
     (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.totalPages"
+    [maxSize]="apartaments.meta.pageCount"
     ></pagination-controls>
 </div>
+
 
 <div *ngIf="error === true">
     <div class="alert alert-danger mt-3" role="alert">
@@ -20,7 +21,7 @@
       </div>
 </div>
 
-<div *ngIf="apartaments.items.length === 0">
+<div *ngIf="apartaments.data.length === 0">
     <div class="alert alert-danger mt-3" role="alert">
         <h4 class="alert-heading">Not Found</h4>
         <p>There are not apartaments to show you</p>
@@ -35,10 +36,10 @@
     <div 
         class="col-12 col-md-6 col-lg-4 m-0 p-1 mt-3" 
         *ngFor="
-        let apartament of apartaments.items | paginate: { 
-            itemsPerPage: apartaments.meta.itemsPerPage, 
-            currentPage: apartaments.meta.currentPage,
-            totalItems: apartaments.meta.totalItems 
+        let apartament of apartaments.data | paginate: { 
+            itemsPerPage: apartaments.meta.take, 
+            currentPage: currentPageRouter,
+            totalItems: apartaments.meta.itemCount 
         }" 
         >
         <app-card [departament]="apartament"></app-card>
@@ -46,12 +47,12 @@
 </div>
 
 <div 
-    *ngIf="apartaments.meta.totalPages > 1"
+    *ngIf="apartaments.meta.pageCount > 1"
     class="d-block" 
     style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
     class="my-pagination"
     (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.totalPages"
+    [maxSize]="apartaments.meta.pageCount"
     ></pagination-controls>
 </div>

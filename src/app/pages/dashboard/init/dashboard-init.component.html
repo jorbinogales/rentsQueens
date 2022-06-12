@@ -11,7 +11,7 @@
         Crear Apartamento
     </button>
 </div>
-<div *ngIf="apartaments.items.length == 0" class="card-body mt-5">
+<div *ngIf="apartaments.data.length == 0" class="card-body mt-5">
     <div class="alert alert-danger">
         No tienes Apartamentos creados
         <button class="btn btn-light m-auto d-none d-lg-block" [routerLink]="['/','dashboard','create-apartament']">
@@ -23,40 +23,46 @@
     </div>
 </div>
 
-<div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+
+<div 
+    *ngIf="apartaments.meta.pageCount > 1"
+    class="d-block" 
+    style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
-    *ngIf="apartaments.meta.totalPages > 1"
     class="my-pagination"
     (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.totalPages"
+    [maxSize]="apartaments.meta.pageCount"
     ></pagination-controls>
-</div>        
+</div>  
 
 
-<div class="row mt-5" *ngIf="apartaments.items.length > 0" >
+<div class="row mt-4" *ngIf="loading === false">
     <div 
-        class="col-12 col-md-6 col-lg-4 m-0 p-1" 
+        class="col-12 col-md-6 col-lg-4 m-0 p-1 mt-3" 
         *ngFor="
-            let apartament of apartaments.items | paginate: { 
-                itemsPerPage: apartaments.meta.itemsPerPage, 
-                currentPage: apartaments.meta.currentPage,
-                totalItems: apartaments.meta.totalItems 
-            }"  
+        let apartament of apartaments.data | paginate: { 
+            itemsPerPage: apartaments.meta.take, 
+            currentPage: apartaments.meta.page,
+            totalItems: apartaments.meta.itemCount 
+        }" 
         >
-        <app-card 
+        <app-card
         (status)="changeStatus($event)"
         (delete)="deleteDepartament($event)"
-        [departament]="apartament"
-        ></app-card>
+        [departament]="apartament"></app-card>
     </div>
 </div>
 
-<div class="d-block" style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
+
+
+<div 
+    *ngIf="apartaments.meta.pageCount > 1"
+    class="d-block" 
+    style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
     <pagination-controls 
-    *ngIf="apartaments.meta.totalPages > 1"
     class="my-pagination"
     (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.totalPages"
+    [maxSize]="apartaments.meta.pageCount"
     ></pagination-controls>
 </div>
     

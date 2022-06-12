@@ -5,7 +5,6 @@ import { HomeDepartamentResolver } from './departament/departament.resolver';
 import { HomeInitComponent } from './init/home-init.component';
 import { HomeInitResolver } from './init/home-init.resolver';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -14,21 +13,28 @@ const routes: Routes = [
         path: '',
         component: HomeInitComponent,
         resolve: {
-            apartaments: HomeInitResolver,
-        }
+          apartaments: HomeInitResolver,
+        },
       },
       {
         path: ':id',
         component: HomeDepartamentComponent,
         resolve: {
-            apartament: HomeDepartamentResolver,
-        }
+          apartament: HomeDepartamentResolver,
+        },
       },
     ],
+  },
+  {
+    path: 'page/:page',
+    component: HomeInitComponent,
+    resolve: {
+      apartaments: HomeInitResolver,
+    },
   }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomePagesRounting { }
+export class HomePagesRounting {}
