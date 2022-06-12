@@ -10,7 +10,7 @@
         <strong>{{ departament.title }}</strong>
         <p>{{ departament.address }}</p>
         <p *ngIf="departament.subcity_value" class="badge badge-danger">{{ departament.subcity_value.city_value.name }} - {{ departament.subcity_value.name }}</p>
-        <p class="mb-0">Trenes:</p>
+        <p class="mb-0" *ngIf="departament.trains_value.length > 0">Trenes:</p>
         <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="departament.trains_value">
             <li class="p-1 m-0" *ngFor="let train of departament.trains_value">
                 <span class="badge badge-pill badge-danger" >
