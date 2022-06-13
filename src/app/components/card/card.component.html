@@ -5,21 +5,67 @@
     </div>
     
     <div class="card-body p-2" 
-        [routerLink]="['', 'home', departament.id]"
         [ngClass]="departament.status == 0 ? 'opacity-5' : ''" >
-        <strong>{{ departament.title }}</strong>
-        <p>{{ departament.address }}</p>
-        <p *ngIf="departament.subcity_value" class="badge badge-danger">{{ departament.subcity_value.city_value.name }} - {{ departament.subcity_value.name }}</p>
-        <p class="mb-0" *ngIf="departament.trains_value.length > 0">Trenes:</p>
-        <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="departament.trains_value">
-            <li class="p-1 m-0" *ngFor="let train of departament.trains_value">
-                <span class="badge badge-pill badge-danger" >
-                    {{ train.train_value.code }}
-                </span>
-            </li>
-        </ul>
+            <div [routerLink]="['', 'home', departament.id]">
+            <strong>{{ departament.title }}</strong>
+            <p>{{ departament.address }}</p>
+            <p *ngIf="departament.subcity_value" class="badge badge-danger">{{ departament.subcity_value.city_value.name }} - {{ departament.subcity_value.name }}</p>
+            <p class="mb-0" *ngIf="departament.trains_value.length > 0">Trenes:</p>
+            <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="departament.trains_value">
+                <li class="p-1 m-0" *ngFor="let train of departament.trains_value">
+                    <span class="badge badge-pill badge-danger" >
+                        {{ train.train_value.code }}
+                    </span>
+                </li>
+            </ul>
+        </div>
         <div class="row p-0 m-0">
-            <div class="col-12 col-lg-7 p-0 m-0">
+            <div class="col-12 col-lg-6 p-0 m-0">
+
+                <div id="carouselExampleControls_{{departament.id}}" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" *ngIf="departament.image_values.length > 0">
+                      <div 
+                          class="carousel-item"
+                          *ngFor="let image_value of departament.image_values; let i = index"
+                          [ngClass]="i == 0 ? 'active' : ''" >
+                            <img 
+                            class="d-block w-100 h-100 image-item card-image" 
+                            style="background-image: url('{{url+'/'+image_value.image}}');"
+                            >
+                      </div>
+                    </div>
+              
+                    
+                    <div class="carousel-inner" *ngIf="departament.image_values.length == 0">
+                        <div 
+                            class="carousel-item active">
+                              <img 
+                              class="d-block w-100 h-100 image-item card-image" 
+                              style="background-image: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png');"
+                              >
+                        </div>
+                    </div>
+                    <a
+                    *ngIf="departament.image_values.length > 1"
+                    class="prev btn-danger carousel-control-prev"
+                    href="#carouselExampleControls_{{departament.id}}" 
+                    role="button" 
+                    data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a 
+                    *ngIf="departament.image_values.length > 1"
+                    class="prev btn-danger carousel-control-next" 
+                    href="#carouselExampleControls_{{departament.id}}" 
+                    role="button" 
+                    data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+<!--                   
                 <img 
                 *ngIf="departament.image_values.length > 0"
                 class="w-100 m-auto card-image"
@@ -29,78 +75,75 @@
                 *ngIf="departament.image_values.length == 0"
                 class="w-100 m-auto card-image"
                 style="background: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png')"
-                >
-                <strong class="mt-2 d-block">Posted: {{ departament.created_at | date: 'yyyy-MM-dd h:mm a'}}</strong>
+                > -->
+                <strong class="mt-2 d-block">Fecha: {{ departament.created_at | date: 'yyyy-MM-dd h:mm a'}}</strong>
             </div>
-            <div class="col-12 col-lg-5 p-2 m-0">
+            <div class="col-12 col-lg-6 pl-2 m-0" [routerLink]="['', 'home', departament.id]">
                 <h4 class="m-0">${{ departament.price }}</h4>
                 <p>ID N. {{ departament.id }}</p>
-                <ul class="m-0 p-0">
-                    <li>
+                <div class="row items">
+                    <div class="col-6 col-lg-12">
                         <img class="icon-card" src="assets/icons/room-icon.png">
-                        <span class="ml-3" 
+                        <span class="icon-text" 
                         *ngIf="departament.bedrooms != 'full_house' && departament.bedrooms != 'Monoambiente'">
-                            {{departament.bedrooms }} Bedrooms
+                            {{departament.bedrooms }} Habitacion(es)
                         </span>              
-                        <span class="ml-3" *ngIf="departament.bedrooms == 'full_house'">
+                        <span class="icon-text" *ngIf="departament.bedrooms == 'full_house'">
                             Full House
                         </span>  
-                        <span class="ml-3" *ngIf="departament.bedrooms == 'Monoambiente'">
+                        <span class="icon-text" *ngIf="departament.bedrooms == 'Monoambiente'">
                             Monoambiente
                         </span>
-                    </li>
-                    <li *ngIf="departament.credit == true">
-                        <img class="icon-card" src="assets/icons/credit-icon.png">
-                        <span class="ml-3">
-                            Credit
-                        </span>
-                    </li>
-                    <li *ngIf="departament.credit == false">
-                          <span class="material-icons material-symbols-outlined icon-gray">
-                            credit_card_off
-                          </span>
-                          <span class="ml-3">No credito</span>
-                    </li>
-                    <li>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div *ngIf="departament.credit == true">
+                            <img class="icon-card" src="assets/icons/credit-icon.png">
+                            <span class="icon-text">
+                                Crédito
+                            </span>
+                        </div>
+                        <div *ngIf="departament.credit == false">
+                              <span class="icon-card material-icons material-symbols-outlined icon-gray" style="font-size:20px;"> 
+                                credit_card_off
+                              </span>
+                              <span class="icon-text">No crédito</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-12">
                         <img class="icon-card" src="assets/icons/bathroom-icon.png">
-                        <span class="ml-3" *ngIf="departament.bathrooms != 'more_than_3'">
-                            {{departament.bathrooms }} Bathrooms
+                        <span class="icon-text" *ngIf="departament.bathrooms != 'more_than_3'">
+                            {{departament.bathrooms }} Baño(s)
                         </span>
-                        <span class="ml-3" *ngIf="departament.bathrooms == 'more_than_3'">
-                         More 3 Baths
+                        <span class="icon-text" *ngIf="departament.bathrooms == 'more_than_3'">
+                         Más de 3 Baños
                         </span>
-                    </li>
-                    <li *ngIf="departament.parking">
-                        <img class="icon-card" src="assets/icons/garage-icon.png">
-                        <span class="ml-3">
-                            Parking
-                        </span>
-                    </li>
-                    <li *ngIf="departament.parking == false">
-                        <span class="material-symbols-outlined material-icons icon-gray">
-                            no_transfer
-                        </span>
-                        <span class="ml-3">
-                            Not Parking
-                        </span>
-                    </li>
-                    <li *ngIf="departament.pets">
-                        <span class="material-icons">
-                            pets
-                        </span>
-                        <span class="ml-3">Pets</span>
-                    </li>
-                    <li *ngIf="departament.pets == false">
-                        <span class="material-icons-outlined material-icons icon-gray">
-                            warning
-                        </span>
-                        <span class="ml-3">Not Pets</span>
-                    </li>
-                
-                </ul>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div *ngIf="departament.parking">
+                            <img class="icon-card" src="assets/icons/garage-icon.png">
+                            <span class="icon-text">Estacionamiento</span>
+                        </div>
+                        <div *ngIf="departament.parking == false">
+                            <img class="icon-card" src="assets/icons/no-garage-icon.png">
+                            <span class="icon-text">Sin Estacionamiento</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div *ngIf="departament.pets">
+                            <span class="material-icons icon-gray icon-card" >
+                                pets
+                            </span>
+                            <span class="icon-text">Si Mascotas</span>
+                        </div>
+                        <div *ngIf="departament.pets == false">
+                            <img class="icon-card" src="assets/icons/no-pets.png">
+                            <span class="icon-text">No Mascotas</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <p *ngIf="departament.description">{{ departament.description }}</p>
+        <p *ngIf="departament.description" [routerLink]="['', 'home', departament.id]">{{ departament.description }}</p>
     </div>
 </div>
 <div class="row" *ngIf="session == true && _router.url == '/dashboard'">

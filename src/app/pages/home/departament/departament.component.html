@@ -56,6 +56,7 @@
           </div>
       </div>
       <a 
+      style="opacity: 1 !important;"
       *ngIf="apartament.image_values.length > 1"
       class="btn-danger carousel-control-prev"
       href="#carouselExampleControls" 
@@ -65,6 +66,7 @@
         <span class="sr-only">Previous</span>
       </a>
       <a 
+      style="opacity: 1 !important;"
       *ngIf="apartament.image_values.length > 1"
       class="btn-danger carousel-control-next" 
       href="#carouselExampleControls" 
@@ -138,7 +140,7 @@
           <li *ngIf="apartament.credit == true">
               <span class="badge-light p-2">
                 <img class="icon-card" src="assets/icons/credit-icon.png">
-                <span class="ml-3">Credito</span>
+                <span class="ml-3">Necesita crédito</span>
               </span>
           </li>
           <li *ngIf="apartament.credit == false">
@@ -146,7 +148,8 @@
               <span class="material-symbols-outlined icon-gray">
                 credit_card_off
               </span>
-              <span class="ml-3">No Permite credito</span>
+              <span class="ml-3">No necesita crédito
+                </span>
             </span>
           </li>
           <li>
@@ -156,7 +159,7 @@
                   {{apartament.bathrooms }} Baño(s)
                 </span>
                 <span class="ml-3" *ngIf="apartament.bathrooms == 'more_than_3'">
-                  More than 3 Baños
+                  Más de 3 Baños
                 </span>    
             </span>
           </li>
@@ -168,20 +171,8 @@
           </li>
           <li *ngIf="apartament.parking == false">
             <span class="badge-light p-2">
-              <span class="material-symbols-outlined icon-gray">
-                no_transfer
-              </span>
+              <img class="icon-card" src="assets/icons/no-garage-icon.png">
               <span class="ml-3">Sin Estacionamiento</span>
-            </span>
-          </li>
-          <li *ngIf="apartament.subcity_value">
-            <span class="badge-light p-2">
-              <span class="material-icons">
-                location_city
-              </span>
-              <span *ngIf="apartament.subcity_value" class="ml-3">
-                Subciudad: {{ apartament.subcity_value.name }}
-              </span>
             </span>
           </li>
           <li *ngIf="apartament.subcity_value">
@@ -190,7 +181,17 @@
                 location_city
               </span>
               <span *ngIf="apartament.subcity_value.city_value" class="ml-3">
-                Ciudad: {{ apartament.subcity_value.city_value.name }}
+                Condado: {{ apartament.subcity_value.city_value.name }}
+              </span>
+            </span>
+          </li>
+          <li *ngIf="apartament.subcity_value">
+            <span class="badge-light p-2">
+              <span class="material-icons">
+                location_city
+              </span>
+              <span *ngIf="apartament.subcity_value" class="ml-3">
+                Ciudad: {{ apartament.subcity_value.name }}
               </span>
             </span>
           </li>
@@ -199,15 +200,13 @@
               <span class="material-icons">
                 pets
               </span>
-              <span class="ml-3">Permite Mascotas</span>
+              <span class="ml-3">Si Mascotas</span>
             </span>
           </li>
           <li *ngIf="apartament.pets == false">
             <span class="badge-light p-2">
-              <span class="material-icons">
-                warning
-              </span>
-              <span class="ml-3">No Permite Mascotas</span>
+              <img class="icon-card" src="assets/icons/no-pets.png">
+              <span class="ml-3">No Mascotas</span>
             </span>
           </li>
       </ul>
@@ -246,7 +245,7 @@
   <div 
       class="col-0 col-lg-4 d-none d-lg-block p-1 mt-3" 
       >
-      <h3>Others Apartaments</h3>
+      <h3>Otros Apartamentos</h3>
       <div class="row">
         <div class="col-12 mt-3" *ngFor="let apartament of apartaments.data" >
           <app-card [departament]="apartament"></app-card>
