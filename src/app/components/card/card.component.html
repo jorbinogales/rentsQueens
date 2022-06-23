@@ -146,7 +146,7 @@
         <p *ngIf="departament.description" [routerLink]="['', 'home', departament.id]">{{ departament.description }}</p>
     </div>
 </div>
-<div class="row" *ngIf="session == true && _router.url == '/dashboard'">
+<div class="row" *ngIf="session == true && _router.url.split('/')[1] == 'dashboard'">
     <div class="col-4">
         <button 
         (click)="changeStatus(departament.id)"
