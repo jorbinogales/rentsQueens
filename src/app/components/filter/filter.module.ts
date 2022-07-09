@@ -4,16 +4,8 @@ import { FilterComponent } from './filter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [
-        FilterComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
-    exports: [
-        FilterComponent,
-    ]
+  declarations: [FilterComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  exports: [FilterComponent],
 })
-export class FilterModule { }
+export class FilterModule {}

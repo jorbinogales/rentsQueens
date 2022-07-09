@@ -20,15 +20,27 @@ export class HomeInitService {
     let form = {};
     if (data) {
       if (data.credit != null && data.credit != 'null') {
-        data.credit = data.credit == 'true' ? true : false;
+        if (data.credit == true || data.credit == 'true') {
+          data.credit = true;
+        } else {
+          data.credit = false;
+        }
       }
 
       if (data.parking != null && data.parking != 'null') {
-        data.parking = data.parking == 'true' ? true : false;
+        if (data.parking == true || data.parking == 'true') {
+          data.parking = true;
+        } else {
+          data.parking = false;
+        }
       }
 
       if (data.pets != null && data.pets != 'null') {
-        data.pets = data.pets == 'true' ? true : false;
+        if (data.pets == true || data.pets == 'true') {
+          data.pets = true;
+        } else {
+          data.pets = false;
+        }
       }
 
       form = {

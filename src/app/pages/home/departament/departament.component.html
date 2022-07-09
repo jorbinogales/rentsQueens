@@ -1,77 +1,53 @@
 <div class="row mt-5">
   <div class="col-12 col-lg-8 position-relative">
-    <button 
-    data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-    class="btn btn-danger mb-3" 
-    (click)="backClicked()"> 
+    <button data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="btn btn-danger mb-3"
+      (click)="backClicked()">
       <span class="material-icons">
         arrow_back_ios
       </span>
       Volver
     </button>
     <h2 class="d-block w-100 position-relative">
-      {{ apartament.title }} 
+      {{ apartament.title }}
     </h2>
 
 
     <h4>
-      <span 
-      *ngIf="apartament.city_value"
-      class="badge-pill badge-danger pr-2 pl-2">
+      <span *ngIf="apartament.city_value" class="badge-pill badge-danger pr-2 pl-2">
         City: {{ apartament.city_value.name }}
       </span>
       <p>
         {{ apartament.address }}
       </p>
-      <span 
-      *ngIf="apartament.user_value.name"
-      class="float-right badge-pill badge-danger pr-2 pl-2">
+      <span *ngIf="apartament.user_value.name" class="float-right badge-pill badge-danger pr-2 pl-2">
         Agent: {{ apartament.user_value.name }}
       </span>
     </h4>
 
-    
-    
+
+
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" *ngIf="apartament.image_values.length > 0">
-        <div 
-            class="carousel-item"
-            *ngFor="let image_value of apartament.image_values; let i = index"
-            [ngClass]="i == 0 ? 'active' : ''" >
-              <img 
-              class="d-block w-100 h-100 image-item" 
-              style="background-image: url('{{url+'/'+image_value.image}}');"
-              >
+        <div class="carousel-item" *ngFor="let image_value of apartament.image_values; let i = index"
+          [ngClass]="i == 0 ? 'active' : ''">
+          <img class="d-block w-100 h-100 image-item" style="background-image: url('{{url+'/'+image_value.image}}');">
         </div>
       </div>
 
-      
+
       <div class="carousel-inner" *ngIf="apartament.image_values.length == 0">
-          <div 
-              class="carousel-item active">
-                <img 
-                class="d-block w-100 h-100 image-item" 
-                style="background-image: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png');"
-                >
-          </div>
+        <div class="carousel-item active">
+          <img class="d-block w-100 h-100 image-item"
+            style="background-image: url('https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png');">
+        </div>
       </div>
-      <a 
-      style="opacity: 1 !important;"
-      *ngIf="apartament.image_values.length > 1"
-      class="btn-danger carousel-control-prev"
-      href="#carouselExampleControls" 
-      role="button" 
-      data-slide="prev">
+      <a style="opacity: 1 !important;" *ngIf="apartament.image_values.length > 1"
+        class="btn-danger carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a 
-      style="opacity: 1 !important;"
-      *ngIf="apartament.image_values.length > 1"
-      class="btn-danger carousel-control-next" 
-      href="#carouselExampleControls" 
-      role="button" 
-      data-slide="next">
+      <a style="opacity: 1 !important;" *ngIf="apartament.image_values.length > 1"
+        class="btn-danger carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -81,9 +57,9 @@
       <strong class="mb-0">Trenes:</strong>
       <ul class="m-0 p-0 d-flex flex-wrap" *ngIf="apartament.trains_value" style="list-style:none">
         <li class="p-1 m-0" *ngFor="let train of apartament.trains_value">
-            <span class="badge badge-pill badge-danger" >
-                {{ train.train_value.code }}
-            </span>
+          <span class="badge badge-pill badge-danger">
+            {{ train.train_value.code }}
+          </span>
         </li>
       </ul>
     </div>
@@ -94,8 +70,8 @@
         <span class="material-icons icon-gray">
           railway_alert
         </span>
-        <span  class="ml-3 badge-light">
-         No hay paradas de trenes cerca
+        <span class="ml-3 badge-light">
+          No hay paradas de trenes cerca
         </span>
       </span>
     </div>
@@ -105,43 +81,44 @@
         <h4>Posted: {{ apartament.created_at | date: 'yyyy-MM-dd h:mm a'}}</h4>
         <ul class="m-0 p-0 list">
           <li>
-            <span class="badge-light p-2"  *ngIf="apartament.floors">
+            <span class="badge-light p-2" *ngIf="apartament.floors">
               <span class="material-icons">
                 business
               </span>
-              <span class="ml-3" *ngIf="apartament.floors != 'Ático' && apartament.floors != 'others' && apartament.floors != 'Sótano'">
+              <span class="ml-3"
+                *ngIf="apartament.floors != 'Ático' && apartament.floors != 'others' && apartament.floors != 'Sótano'">
                 {{apartament.floors }} Piso
-              </span>              
+              </span>
               <span class="ml-3" *ngIf="apartament.floors == 'Ático'">
                 Ático
-              </span> 
+              </span>
               <span class="ml-3" *ngIf="apartament.floors == 'others'">
                 Other
-              </span> 
+              </span>
               <span class="ml-3" *ngIf="apartament.floors == 'Sótano'">
                 Sótano
-              </span> 
+              </span>
             </span>
           </li>
           <li>
-              <span class="badge-light p-2">
-                <img class="icon-card" src="assets/icons/room-icon.png">
-                <span class="ml-3" *ngIf="apartament.bedrooms != 'full_house' && apartament.bedrooms != 'Monoambiente'">
-                  {{apartament.bedrooms }} Habitaciones
-                </span>              
-                <span class="ml-3" *ngIf="apartament.bedrooms == 'full_house'">
-                  Full House
-                </span>
-                <span class="ml-3" *ngIf="apartament.bedrooms == 'Monoambiente'">
-                  Monoambiente
-                </span>  
+            <span class="badge-light p-2">
+              <img class="icon-card" src="assets/icons/room-icon.png">
+              <span class="ml-3" *ngIf="apartament.bedrooms != 'full_house' && apartament.bedrooms != 'Monoambiente'">
+                {{apartament.bedrooms }} Habitaciones
               </span>
+              <span class="ml-3" *ngIf="apartament.bedrooms == 'full_house'">
+                Full House
+              </span>
+              <span class="ml-3" *ngIf="apartament.bedrooms == 'Monoambiente'">
+                Monoambiente
+              </span>
+            </span>
           </li>
           <li *ngIf="apartament.credit == true">
-              <span class="badge-light p-2">
-                <img class="icon-card" src="assets/icons/credit-icon.png">
-                <span class="ml-3">Necesita crédito</span>
-              </span>
+            <span class="badge-light p-2">
+              <img class="icon-card" src="assets/icons/credit-icon.png">
+              <span class="ml-3">Necesita crédito</span>
+            </span>
           </li>
           <li *ngIf="apartament.credit == false">
             <span class="badge-light p-2">
@@ -149,18 +126,18 @@
                 credit_card_off
               </span>
               <span class="ml-3">No necesita crédito
-                </span>
+              </span>
             </span>
           </li>
           <li>
             <span class="badge-light p-2">
-                <img class="icon-card" src="assets/icons/bathroom-icon.png">
-                <span class="ml-3" *ngIf="apartament.bathrooms != 'more_than_3'">
-                  {{apartament.bathrooms }} Baño(s)
-                </span>
-                <span class="ml-3" *ngIf="apartament.bathrooms == 'more_than_3'">
-                  Más de 3 Baños
-                </span>    
+              <img class="icon-card" src="assets/icons/bathroom-icon.png">
+              <span class="ml-3" *ngIf="apartament.bathrooms != 'more_than_3'">
+                {{apartament.bathrooms }} Baño(s)
+              </span>
+              <span class="ml-3" *ngIf="apartament.bathrooms == 'more_than_3'">
+                Más de 3 Baños
+              </span>
             </span>
           </li>
           <li *ngIf="apartament.parking">
@@ -209,20 +186,20 @@
               <span class="ml-3">No Mascotas</span>
             </span>
           </li>
-      </ul>
+        </ul>
       </div>
       <div class="col-4">
-          <h2 class="d-block text-right">
-            <span class="badge badge-pill badge-danger">${{ apartament.price }}</span>
-          </h2>
-          <h5 class="d-block text-right" *ngIf="session">
-            <span class="badge badge-pill badge-light" *ngIf="apartament.phone">
-              <span class="material-icons">
-                call
-              </span>
-              {{ apartament.phone }}
+        <h2 class="d-block text-right">
+          <span class="badge badge-pill badge-danger">${{ apartament.price }}</span>
+        </h2>
+        <h5 class="d-block text-right" *ngIf="session">
+          <span class="badge badge-pill badge-light" *ngIf="apartament.phone">
+            <span class="material-icons">
+              call
             </span>
-          </h5>
+            {{ apartament.phone }}
+          </span>
+        </h5>
       </div>
     </div>
 
@@ -233,23 +210,20 @@
     </div>
 
     <div class="row mt-3" *ngIf="apartament.internal_description">
-      <div class="col-12"  *ngIf="session">
-        <p class="description_internal bg-light p-2" 
-        >
+      <div class="col-12" *ngIf="session">
+        <p class="description_internal bg-light p-2">
           {{ apartament.internal_description }}
         </p>
       </div>
     </div>
   </div>
 
-  <div 
-      class="col-0 col-lg-4 d-none d-lg-block p-1 mt-3" 
-      >
-      <h3>Otros Apartamentos</h3>
-      <div class="row">
-        <div class="col-12 mt-3" *ngFor="let apartament of apartaments.data" >
-          <app-card [departament]="apartament"></app-card>
-        </div>
+  <div class="col-0 col-lg-4 d-none d-lg-block p-1 mt-3">
+    <h3>Otros Apartamentos</h3>
+    <div class="row">
+      <div class="col-12 mt-3" *ngFor="let apartament of apartaments.data">
+        <app-card [departament]="apartament"></app-card>
       </div>
+    </div>
   </div>
 </div>

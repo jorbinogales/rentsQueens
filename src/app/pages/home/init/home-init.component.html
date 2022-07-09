@@ -1,14 +1,9 @@
 <app-filter (filterData)="getDataFromFilter($event)"></app-filter>
 
-<div 
-    *ngIf="apartaments.meta.pageCount > 1"
-    class="d-block" 
+<div *ngIf="apartaments.meta.pageCount > 1" class="d-block"
     style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
-    <pagination-controls 
-    class="my-pagination"
-    (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.pageCount"
-    ></pagination-controls>
+    <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"
+        [maxSize]="apartaments.meta.pageCount"></pagination-controls>
 </div>
 
 
@@ -18,7 +13,7 @@
         <p>Something is wrong</p>
         <hr>
         <p class="mb-0">Apartaments are not loaded, try later.</p>
-      </div>
+    </div>
 </div>
 
 <div *ngIf="apartaments.data.length === 0">
@@ -27,32 +22,24 @@
         <p>There are not apartaments to show you</p>
         <hr>
         <p class="mb-0">No apartment results found, please come back later.</p>
-      </div>
+    </div>
 </div>
 
-<app-loading class="d-block mt-5"  *ngIf="loading === true"></app-loading>
+<app-loading class="d-block mt-5" *ngIf="loading === true"></app-loading>
 
 <div class="row mt-4" *ngIf="loading === false">
-    <div 
-        class="col-12 col-md-6 col-lg-4 m-0 p-1 mt-3" 
-        *ngFor="
+    <div class="col-12 col-md-6 col-lg-4 m-0 p-1 mt-3" *ngFor="
         let apartament of apartaments.data | paginate: { 
             itemsPerPage: apartaments.meta.take, 
             currentPage: currentPageRouter,
             totalItems: apartaments.meta.itemCount 
-        }" 
-        >
+        }">
         <app-card [departament]="apartament"></app-card>
     </div>
 </div>
 
-<div 
-    *ngIf="apartaments.meta.pageCount > 1"
-    class="d-block" 
+<div *ngIf="apartaments.meta.pageCount > 1" class="d-block"
     style="display:block; margin:auto; max-width: 350px; margin-top:50px;">
-    <pagination-controls 
-    class="my-pagination"
-    (pageChange)="pageChanged($event)"
-    [maxSize]="apartaments.meta.pageCount"
-    ></pagination-controls>
+    <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"
+        [maxSize]="apartaments.meta.pageCount"></pagination-controls>
 </div>
