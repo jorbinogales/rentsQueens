@@ -45,6 +45,7 @@ export class FilterComponent implements OnInit {
       baths: [],
       price: [],
       trains: [],
+      city: [],
       subcity: [],
       parking: [],
       id: [],
@@ -79,6 +80,9 @@ export class FilterComponent implements OnInit {
     );
     this.form.controls['trains'].setValue(
       this.params.trains != null ? this.params.trains : null
+    );
+    this.form.controls['city'].setValue(
+      this.params.subcity != null ? this.params.subcity : null
     );
     this.form.controls['subcity'].setValue(
       this.params.subcity != null ? this.params.subcity : null

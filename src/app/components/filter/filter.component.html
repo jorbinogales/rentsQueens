@@ -1,46 +1,25 @@
-
 <div class="row">
     <div class="col-12">
-     
-        <form 
-        [formGroup]="form" (submit)="sendFilter()"
-        class="w-100 m-auto align-items-center justify-center d-block">
+
+        <form [formGroup]="form" (submit)="sendFilter()" class="w-100 m-auto align-items-center justify-center d-block">
             <div class="form-row w-100 mt-3">
                 <div class="col-4 col-lg-2 m-auto">
                     <img src="assets/icons/logo_sin_fondo.png" class="w-100 mb-3" style="max-wdith: 200px">
-                    <input 
-                        formControlName="search"
-                        name="search"
-                        type="text" 
-                        class="form-control mt-0"  
-                        id="filter_search" 
-                        placeholder="Buscar"
-                    >
+                    <input formControlName="search" name="search" type="text" class="form-control mt-0"
+                        id="filter_search" placeholder="Buscar">
                 </div>
             </div>
             <div class="form-row align-items-center w-100 mt-3">
-                
+
 
                 <div class="col-4 mb-3 mb-lg-0 col-lg">
-                    <input 
-                    formControlName="id"
-                    name="id"
-                    type="number" 
-                    class="form-control mt-0"  
-                    id="filter_bedrooms" 
-                    min="0"
-                    placeholder="ID"
-                    >
+                    <input formControlName="id" name="id" type="number" class="form-control mt-0" id="filter_bedrooms"
+                        min="0" placeholder="ID">
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    class="custom-select"
-                    id="floors_filter"
-                    formControlName="floors"
-                    name="floors"
-                     >
-                        <option  value="null" selected>Piso</option>
+                    <select class="custom-select" id="floors_filter" formControlName="floors" name="floors">
+                        <option value="null" selected>Piso</option>
                         <option value="Sótano">Sótano</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -51,24 +30,16 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="credit"
-                    name="credit"
-                    class="custom-select"
-                    id="credit_filter">
-                        <option  value="null" selected>Credito</option>
+                    <select formControlName="credit" name="credit" class="custom-select" id="credit_filter">
+                        <option value="null" selected>Credito</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="beds"
-                    name="beds"
-                    class="custom-select"
-                    id="beds_filter">
-                        <option  value="null" selected>Habitaciones</option>
+                    <select formControlName="beds" name="beds" class="custom-select" id="beds_filter">
+                        <option value="null" selected>Habitaciones</option>
                         <option value="Monoambiente">Monoambiente</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -81,10 +52,7 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="baths"
-                    name="baths"
-                    class="custom-select" id="baths_filter">
+                    <select formControlName="baths" name="baths" class="custom-select" id="baths_filter">
                         <option value="null" selected>Baños</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -94,12 +62,8 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="price"
-                    name="price"
-                    class="custom-select" 
-                    id="price_filter">
-                        <option  value="null" selected>Precio</option>
+                    <select formControlName="price" name="price" class="custom-select" id="price_filter">
+                        <option value="null" selected>Precio</option>
                         <option value="0_1000">Menos de $1000</option>
                         <option value="1000_1900">$1000 - $1900</option>
                         <option value="1801_2400">$1901 - $2400</option>
@@ -109,11 +73,7 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="parking"
-                    name="parking"
-                    class="custom-select"
-                     id="parking_filter">
+                    <select formControlName="parking" name="parking" class="custom-select" id="parking_filter">
                         <option value="null" selected>Estacionamiento</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
@@ -121,11 +81,7 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="pets"
-                    name="pets"
-                    class="custom-select"
-                     id="parking_filter">
+                    <select formControlName="pets" name="pets" class="custom-select" id="parking_filter">
                         <option value="null" selected>Mascotas</option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
@@ -133,47 +89,40 @@
                 </div>
 
                 <div class="col-4 mb-3 mb-lg-0  col-lg">
-                    <select 
-                    formControlName="trains"
-                    name="trains"
-                    class="custom-select" id="trains_filter">
+                    <select formControlName="trains" name="trains" class="custom-select" id="trains_filter">
                         <option value="null" selected>Trenes</option>
-                        <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}</option>
+                        <option *ngFor="let train of trains" value="{{ train.id }}">{{ train.code }} | {{ train.city}}
+                        </option>
                     </select>
                 </div>
 
                 <div class="col-4  mb-3 mb-lg-0 col-lg">
-                    <select 
-                    class="custom-select" id="city_filter"
-                    (change)="getSubCity($event)">
+                    <select formControlName="city" class="custom-select" id="city_filter" (change)="getSubCity($event)">
                         <option value="null" selected>Condados</option>
                         <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
                     </select>
                 </div>
 
                 <div class="col-4  mb-3 mb-lg-0 col-lg">
-                    <select 
-                    formControlName="subcity"
-                    name="subcity"
-                    class="custom-select" id="subcity_filter">
+                    <select formControlName="subcity" name="subcity" class="custom-select" id="subcity_filter">
                         <option value="null" selected>Ciudades</option>
-                        <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}</option>
+                        <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}
+                        </option>
                     </select>
                 </div>
 
                 <div class="col-6  mb-3 mb-lg-0 col-lg">
                     <button type="submit" class="btn btn-danger d-block w-100">
-                        <span  class="material-icons">
+                        <span class="material-icons">
                             search
-                        </span>                            
+                        </span>
                     </button>
                 </div>
                 <div class="col-6  mb-3 mb-lg-0 col-lg">
                     <button class="btn btn-danger d-block w-100" (click)="refreshFilter()">
-                        <span 
-                        class="material-icons">
+                        <span class="material-icons">
                             clear
-                        </span>                            
+                        </span>
                     </button>
                 </div>
             </div>

@@ -51,8 +51,9 @@ export class HomeInitService {
         price: data.price == 'null' ? null : data.price,
         parking: data.parking == 'null' ? null : data.parking,
         id: data.id == 'null' ? null : parseInt(data.id),
-        train: data.id == 'null' ? null : parseInt(data.trains),
-        subcity: data.id == 'null' ? null : parseInt(data.subcity),
+        train: data.trains == 'null' ? null : parseInt(data.trains),
+        city: data.city == 'null' ? null : parseInt(data.city),
+        subcity: data.subcity == 'null' ? null : parseInt(data.subcity),
         search: data.seach == 'null' ? null : data.search,
         pets: data.pets == 'null' ? null : data.pets,
       };
