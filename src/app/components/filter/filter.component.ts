@@ -15,7 +15,8 @@ export class FilterComponent implements OnInit {
   form: any = FormGroup;
   trains: any;
   cities: any;
-  subcities: any;
+  subcities_brooklyn: any;
+  subcities_queens: any;
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _filterService: FilterService,
@@ -27,11 +28,17 @@ export class FilterComponent implements OnInit {
     this._filterService.getTrains().then((resp) => {
       this.trains = resp;
     });
-    this._filterService.getCity().then((resp) => {
-      this.cities = resp;
-    });
+    // this._filterService.getCity().then((resp) => {
+    //   this.cities = resp;
+    // });
     this._route.queryParams.subscribe((params) => {
       this.params = params;
+    });
+    this._filterService.getSubCity('1').then((resp) => {
+      this.subcities_brooklyn = resp;
+    });
+    this._filterService.getSubCity('2').then((resp) => {
+      this.subcities_queens = resp;
     });
     this.buildForm();
   }
@@ -45,8 +52,9 @@ export class FilterComponent implements OnInit {
       baths: [],
       price: [],
       trains: [],
-      city: [],
-      subcity: [],
+      // city: [],
+      subcity_queens: [],
+      subcity_brooklyn: [],
       parking: [],
       id: [],
       search: [],
@@ -81,11 +89,14 @@ export class FilterComponent implements OnInit {
     this.form.controls['trains'].setValue(
       this.params.trains != null ? this.params.trains : null
     );
-    this.form.controls['city'].setValue(
-      this.params.subcity != null ? this.params.subcity : null
+    // this.form.controls['city'].setValue(
+    //   this.params.subcity != null ? this.params.subcity : null
+    // );
+    this.form.controls['subcity_queens'].setValue(
+      this.params.subcity_queens != null ? this.params.subcity_queens : null
     );
-    this.form.controls['subcity'].setValue(
-      this.params.subcity != null ? this.params.subcity : null
+    this.form.controls['subcity_brooklyn'].setValue(
+      this.params.subcity_brooklyn != null ? this.params.subcity_brooklyn : null
     );
     this.sendFilter();
   }
@@ -93,7 +104,6 @@ export class FilterComponent implements OnInit {
   sendFilter() {
     const form = this.form.getRawValue();
     this.filterData.emit(form);
-    document.getElementById('closeModalFilter').click();
   }
 
   refreshFilter() {
@@ -101,10 +111,10 @@ export class FilterComponent implements OnInit {
     this._router.navigate(['/', 'home', 'page', 1]);
   }
 
-  getSubCity(e) {
-    const city_id = e.target.value;
-    this._filterService.getSubCity(city_id).then((resp) => {
-      this.subcities = resp;
-    });
-  }
+  // getSubCity(id) {
+  //   const city_id = e.target.value;
+  //   this._filterService.getSubCity(city_id).then((resp) => {
+  //     this.subcities = resp;
+  //   });
+  // }
 }

@@ -69,7 +69,8 @@ export class HomeInitComponent implements OnInit {
       pets: this.globalForm.pets,
       price: this.globalForm.price,
       search: this.globalForm.search,
-      subcity: this.globalForm.subcity,
+      subcity_queens: this.globalForm.subcity_queens,
+      subcity_brooklyn: this.globalForm.subcity_brooklyn,
       trains: this.globalForm.trains,
     };
     if (page) {

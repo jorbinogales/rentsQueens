@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // MS_USER_API: 'http://localhost:4000',
-  MS_USER_API: 'https://backend.rentsbrooklynqueens.com',
+  MS_USER_API: 'http://localhost:4000',
+  // MS_USER_API: 'https://backend.rentsbrooklynqueens.com',
 };
 
 /*

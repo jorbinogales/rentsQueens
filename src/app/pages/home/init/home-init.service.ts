@@ -17,7 +17,9 @@ export class HomeInitService {
   }
 
   getAparments(data?: any, page?: any): Promise<any> {
+    console.log(data);
     let form = {};
+    let subcity = [];
     if (data) {
       if (data.credit != null && data.credit != 'null') {
         if (data.credit == true || data.credit == 'true') {
@@ -43,6 +45,14 @@ export class HomeInitService {
         }
       }
 
+      if (data.subcity_brooklyn) {
+        subcity.push(data.subcity_brooklyn);
+      }
+
+      if (data.subcity_queens) {
+        subcity.push(data.subcity_queens);
+      }
+
       form = {
         floors: data.floors == 'null' ? null : data.floors,
         credit: data.credit == 'null' ? null : data.credit,
@@ -52,11 +62,12 @@ export class HomeInitService {
         parking: data.parking == 'null' ? null : data.parking,
         id: data.id == 'null' ? null : parseInt(data.id),
         train: data.trains == 'null' ? null : parseInt(data.trains),
-        city: data.city == 'null' ? null : parseInt(data.city),
-        subcity: data.subcity == 'null' ? null : parseInt(data.subcity),
+        // city: data.city == 'null' ? null : parseInt(data.city),
+        subcity: subcity == [] ? null : subcity,
         search: data.seach == 'null' ? null : data.search,
         pets: data.pets == 'null' ? null : data.pets,
       };
+      console.log(form);
     }
 
     page = page == null ? 1 : page;

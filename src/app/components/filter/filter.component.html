@@ -96,17 +96,29 @@
                     </select>
                 </div>
 
-                <div class="col-4  mb-3 mb-lg-0 col-lg">
+                <!-- <div class="col-4  mb-3 mb-lg-0 col-lg">
                     <select formControlName="city" class="custom-select" id="city_filter" (change)="getSubCity($event)">
                         <option value="null" selected>Condados</option>
                         <option *ngFor="let city of cities" value="{{ city.id }}">{{ city.name }}</option>
                     </select>
+                </div> -->
+
+                <div class="col-4  mb-3 mb-lg-0 col-lg">
+                    <select formControlName="subcity_brooklyn" name="subcity_brooklyn" class="custom-select"
+                        id="subcity_brooklyn_filter">
+                        <option value="null" selected>Brooklyn</option>
+                        <option *ngFor="let subcitie of subcities_brooklyn" value="{{ subcitie.id }}">{{
+                            subcitie.name }}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="col-4  mb-3 mb-lg-0 col-lg">
-                    <select formControlName="subcity" name="subcity" class="custom-select" id="subcity_filter">
-                        <option value="null" selected>Ciudades</option>
-                        <option *ngFor="let subcitie of subcities" value="{{ subcitie.id }}">{{ subcitie.name }}
+                    <select formControlName="subcity_queens" name="subcity_queens" class="custom-select"
+                        id="subcity_queens_filter">
+                        <option value="null" selected>Queens</option>
+                        <option *ngFor="let subcitie of subcities_queens" value="{{ subcitie.id }}">{{
+                            subcitie.name }}
                         </option>
                     </select>
                 </div>
